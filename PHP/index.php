@@ -7,15 +7,14 @@
     <title>tech-jam</title>
 </head>
 
-<!-- ゆうき -->
 <!-- http://localhost:8888/tech-jam/PHP/  -->
-
 
 
 <body>
     <h1>Welcome to tech-jam</h1>
     <p>こんにtは</p>
     <p>ハロー</p>
+    <img src="/IMG/icon.jpg" alt="icon">
 </body>
 
 </html>
