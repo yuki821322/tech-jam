@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 20px;
+}
+
+.title {
+    font-size: 35px;
+    margin-right: 750px;
+}
+
+.main-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 60px 80px;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.main-title {
+    font-size: 100px;
+    line-height: 1.2;
+    max-width: 500px;
+    flex: 1;
+    margin-left: 150px;
+    margin: auto;
+}
+
+span {
+    color: hsl(226, 92%, 65%);
+}
+
+.container {
+    flex: 1;
+    max-width: 550px;
+}
+
+.subtext {
+    font-size: 25px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.explanation {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.login {
+    margin-top: 10px;
+}
+
+.btn {
+    margin-bottom: 10px;
+}
+
+.sign-up {
+    display: block;
+    margin-top: 10px;
+    color: hsl(266, 66%, 45%);
+    text-decoration: none;
+}
+
+/* スマホ用 */
+@media screen and (max-width: 200px) {
+    body::before {
+        display: block;
+        font-size: 30px;
+    }
+}
+
+.main-title {
+    font-size: 60px;
+}
+
+.title {
+    text-align: center;
+    margin: auto;
+}
+
+.container {
+    max-width: 100%;
+}
+
+.btn {
+    margin: 0 auto;
+}
+
+/* ここまで */
