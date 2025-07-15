@@ -11,14 +11,12 @@
 
 <body>
     <div class="box">
-    <h1>ログインページ</h1>
-    <form action="login_check.php" method="post">
-        <label for="email">メールアドレス:</label>
-        <input type="email" name="email" required><br>
-        <label for="password">パスワード:</label>
-        <input type="password" name="password" required><br>
-        <input type="submit" value="ログイン">
-    </form>
+        <h1>ログインページ</h1>
+        <form action="login_check.php" method="post">
+            <input type="email" name="email" required placeholder="Email"><br>
+            <input type="password" name="password" required placeholder="Password"><br>
+            <input type="submit" value="ログイン">
+        </form>
     </div>
     <!-- 隠しfromを使って名前をfrom.phpに送る -->
     <form action="from.php" method="post" style="display: none;">
