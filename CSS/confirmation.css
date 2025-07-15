@@ -16,6 +16,7 @@ body {
 
 h1 {
     text-align: center;
+    font-size: 35px;
     margin-bottom: 30px;
 }
 
@@ -63,7 +64,7 @@ form {
     margin-top: 30px;
     padding: 15px;              /* 高さと余白 */
     font-size: 18px;            /* 文字サイズ */
-    background-color: #007bff;  /* 青色 */
+    background-color: #4F46E5;  /* 青色 */
     color: white;               /* 文字色を白に */
     border: none;               /* 枠線を消す */
     border-radius: 8px;         /* 角を丸く */
