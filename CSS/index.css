@@ -60,6 +60,8 @@ span {
 
 .sign-up {
     display: block;
+    font-size: 15px;
+    margin-top: 5px;
     margin-left: 13px;
     /* margin-top: 100px; */
     color: hsl(209, 100%, 63%);
@@ -84,7 +86,11 @@ span {
 
 /* スマホ用はここまで */
 /* ここからデザイン */
-header {
-    position: relative;
-    background-color: hsl(226, 92%, 65%);
+.top {
+    position: absolute;
+    top: 0;
+    left: 240px;
+    height: 25px;
+    width: 100%;
+    background-color: #0e32ff;
 }

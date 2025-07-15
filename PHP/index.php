@@ -13,6 +13,7 @@
 
 <body>
   <header>
+    <div class="top"></div>
     <h2 class="title">Team-Task</h2>
   </header>
 
