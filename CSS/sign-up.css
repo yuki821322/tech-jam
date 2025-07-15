@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.sign-all {
+    background-color: rgb(255, 255, 255);
+    height: auto;
+    padding: 90px;
+}
+
+.sign {
+    width: 600px;
+    background-color: rgb(251, 251, 251);
+    box-shadow:0 0 10px 10px rgba(53, 53, 53, 0.097);;
+    padding: 60px;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.sign h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* ===== 入力フィールド共通スタイル ===== */
+.input {
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    border-bottom: 2px solid #888;
+    background: transparent;
+    padding: 10px 5px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input:focus {
+    border-color: #333;
+}
+
+/* ===== ラベルのスタイル ===== */
+label {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 0;
+    color: #333;
+}
+
+/* ラジオボタン用のラベルは inline-block のままでOK */
+input[type="radio"] + label {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* ラジオボタンのグループ調整 */
+p:last-of-type input[type="radio"] {
+    margin-top: 20px;
+    margin-right: 5px;
+}
+
+span{
+    font-size: 12px;
+}
+
+
+.submit-button {
+    width: 100%;                /* 横幅を全体に */
+    margin-top: 30px;
+    padding: 15px;              /* 高さと余白 */
+    font-size: 18px;            /* 文字サイズ */
+    background-color: #007bff;  /* 青色 */
+    color: white;               /* 文字色を白に */
+    border: none;               /* 枠線を消す */
+    border-radius: 8px;         /* 角を丸く */
+    cursor: pointer;            /* マウスカーソル */
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;  /* ホバー時の濃い青 */
+}
