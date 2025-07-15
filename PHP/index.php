@@ -26,7 +26,7 @@
             <div class="login">
                 <a href="login.php"><input class="btn" type="button" value="ログイン"></a>
                 <div class="sign-up-btn">
-                <a href="sign-up.php" class="sign-up">新規登録へ</a>
+                    <a href="sign-up.php" class="sign-up">新規登録</a>
                 </div>
             </div>
         </div>
