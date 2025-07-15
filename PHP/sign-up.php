@@ -31,17 +31,13 @@
                 ];
                 ?>
                 <p>
+                <p>
                     <?php foreach ($gendar_list as $key => $value): ?>
                         <input type="radio" name="gender" id="gendar<?php echo $key; ?>"
-                            value="<?php echo $key; ?>"
-                            <?php if ($key ===  1)
-                                echo 'checked'
-                            ?>>
-                        <label
-                            for="gendar<?php echo $key; ?>">
-                            <?php echo $value; ?>
-                        </label>
+                            value="<?php echo $key; ?>" onclick="hyouji()">
+                        <label for="gendar<?php echo $key; ?>"><?php echo $value; ?></label>
                     <?php endforeach; ?>
+                </p>
                 </p>
                 <p>
                     <input class="input" type="password" id="password" name="password" required placeholder="Password">
@@ -59,6 +55,7 @@
             </form>
         </div>
     </section>
+    <script src="../JS/sing-up.js"></script>
 </body>
 
 </html>
