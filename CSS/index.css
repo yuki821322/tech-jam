@@ -13,6 +13,9 @@ body {
             white 60%,
             white 80%,
             #8b79fc 100%);
+    /* background-size: cover; */
+    background-attachment: fixed;
+
 }
 
 header {
@@ -32,6 +35,7 @@ header {
     padding: 60px 80px;
     gap: 10px;
     flex-wrap: wrap;
+    margin-top: 60px;
 }
 
 .main-title {
@@ -41,6 +45,8 @@ header {
     margin: auto;
     font-size: 125px;
     margin-left: 200px;
+    /* 黒線 */
+    border-bottom: 7px solid #000;
 }
 
 span {
@@ -100,11 +106,11 @@ span {
         margin-left: 0;
         margin-right: 0;
         margin-top: 20px;
+        border-bottom: none;
     }
 }
 
 /* スマホ用はここまで */
-/* ここからデザイン */
 .top {
     position: absolute;
     top: 0;

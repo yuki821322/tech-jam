@@ -18,7 +18,7 @@
     <div class="top"></div>
     <h2 class="title">Team-Task</h2>
   </header>
-
+  <div class="blue-line"></div>
   <div class="main-layout">
     <h1 class="main-title">
       Let’s<br>
