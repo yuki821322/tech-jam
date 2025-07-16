@@ -25,7 +25,7 @@ header {
 .main-title {
     line-height: 1.2;
     max-width: 500px;
-    flex: 2;
+    flex: 1;
     margin: auto;
 }
 
@@ -73,7 +73,7 @@ span {
 
 /* Let’s Create Task. のフォントサイズ*/
 .main-title {
-    font-size: 70px;
+    font-size: 100px;
 }
 
 .container {

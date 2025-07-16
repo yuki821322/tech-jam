@@ -9,7 +9,7 @@
 </head>
 
 
-<!-- http://localhost:8888/tech-jam/PHP/  -->
+<!-- http://localhost:8888/tech-jam/PHP/index.php  -->
 
 <body>
   <header>
