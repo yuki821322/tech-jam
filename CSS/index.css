@@ -35,7 +35,7 @@ header {
     padding: 60px 80px;
     gap: 10px;
     flex-wrap: wrap;
-    margin-top: 60px;
+    margin-top: 50px;
 }
 
 .main-title {
@@ -43,7 +43,7 @@ header {
     max-width: 500px;
     flex: 1;
     margin: auto;
-    font-size: 125px;
+    font-size: 100px;
     margin-left: 200px;
     /* 黒線 */
     border-bottom: 7px solid #000;
@@ -101,7 +101,7 @@ span {
     }
 
     .main-title {
-        font-size: 50px;
+        font-size: 60px;
         text-align: center;
         margin-left: 0;
         margin-right: 0;
