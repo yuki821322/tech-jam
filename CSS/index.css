@@ -19,7 +19,7 @@ header {
     align-items: flex-start;
     padding: 60px 80px;
     gap: 10px;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
 }
 
 .main-title {
@@ -27,6 +27,8 @@ header {
     max-width: 500px;
     flex: 1;
     margin: auto;
+    font-size: 70px;
+    ;
 }
 
 span {
@@ -68,14 +70,7 @@ span {
     text-decoration: none;
 }
 
-/* スマホ用 */
-@media screen and (max-width: 200px) {}
-
-/* Let’s Create Task. のフォントサイズ*/
-.main-title {
-    font-size: 100px;
-}
-
+    @media (max-width: 700px){
 .container {
     max-width: 100%;
 }
@@ -83,7 +78,16 @@ span {
 .btn {
     margin: 0 auto;
 }
-
+.main-title{
+    font-size: 65px;
+    text-align: center;
+}
+.subtext{
+    font-size: 20px;
+    text-align: left;
+    margin-top: 40px;
+    }
+}
 /* スマホ用はここまで */
 /* ここからデザイン */
 .top {
