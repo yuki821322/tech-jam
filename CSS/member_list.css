@@ -1,0 +1,60 @@
+/* 全体の背景とフォント設定 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* コンテナの中央配置とデザイン */
+.container {
+    max-width: 800px;
+    margin: 60px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* タイトルのスタイル */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* テーブル全体のデザイン */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* ヘッダーセルのスタイル */
+thead th {
+    background-color: #f0f0f0;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+    font-weight: bold;
+    color: #555;
+}
+
+/* データセルのスタイル */
+tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+/* ホバー時の行の背景色 */
+tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* データがなかった場合のメッセージ */
+.not-found {
+    text-align: center;
+    color: #c00;
+    font-weight: bold;
+    margin-top: 20px;
+}

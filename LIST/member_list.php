@@ -1,5 +1,4 @@
 <?php
-$id = $_GET['id'] ?? '';
 $filename = '../CSV/user_data.csv';
 
 // ファイル存在チェック
@@ -8,25 +7,17 @@ if (!file_exists($filename)) {
     exit;
 }
 
-// ファイルを開いて読み取り
-$fp = fopen($filename, 'r');
-$line = null;
-
-// ヘッダー定義（CSVに含まれていない場合）
-$header = ['ID', '名前', 'メールアドレス', '登録日', '権限', 'ユーザー名', '最終ログイン日'];
-
-if ($fp && flock($fp, LOCK_EX)) {
-    while ($record = fgetcsv($fp)) {
-        if ((int)$record[0] === (int)$id) {
-            $line = $record;
-            break;
-        }
+// ファイルを読み込んで配列に格納
+$members = [];
+if (($fp = fopen($filename, 'r')) !== false) {
+    flock($fp, LOCK_SH);
+    // ヘッダー行をスキップ
+    $header = fgetcsv($fp);
+    while ($row = fgetcsv($fp)) {
+        $members[] = $row;
     }
     flock($fp, LOCK_UN);
     fclose($fp);
-} else {
-    echo 'ファイルロックに失敗しました。';
-    exit;
 }
 ?>
 
@@ -35,22 +26,36 @@ if ($fp && flock($fp, LOCK_EX)) {
 
 <head>
     <meta charset="UTF-8">
-    <title>会員詳細</title>
+    <title>メンバーリスト</title>
+    <link rel="stylesheet" href="../CSS/member_list.css">
+</head>
 
-    <div class="card">
-        <h1>会員詳細</h1>
-
-        <?php if ($line): ?>
-            <dl>
-                <?php foreach ($header as $key => $label): ?>
-                    <dt><?php echo htmlspecialchars($label, ENT_QUOTES, 'UTF-8'); ?></dt>
-                    <dd><?php echo htmlspecialchars($line[$key] ?? '', ENT_QUOTES, 'UTF-8'); ?></dd>
-                <?php endforeach; ?>
-            </dl>
+<body>
+    <div class="container">
+        <h1>メンバーリスト</h1>
+        <?php if (count($members) > 0): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>名前</th>
+                        <th>登録日</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($members as $member): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($member[0], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($member[1], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($member[2], ENT_QUOTES, 'UTF-8'); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         <?php else: ?>
-            <p class="not-found">該当する会員が見つかりませんでした。</p>
+            <p class="not-found">メンバーが存在しません。</p>
         <?php endif; ?>
     </div>
-    </body>
+</body>
 
 </html>
