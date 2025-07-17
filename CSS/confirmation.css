@@ -3,15 +3,25 @@ body {
         background-color: #f5f5f5;
         margin: 0;
         padding: 0;
+        background: linear-gradient(to bottom right,
+            rgb(0, 170, 255) 0.3%,
+            white 20%,
+            white 30%,
+            white 40%,
+            white 50%,
+            white 60%,
+            white 80%,
+            #8b79fc 100%);
+             background-attachment: fixed;
     }
 
 .container {
     width: 600px;
-    margin: 100px auto;
+    margin: 150px auto;
     background-color: #ffffff;
     padding: 70px;
     border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow:0 0 10px 10px rgba(53, 53, 53, 0.097);;
 }
 
 h1 {
