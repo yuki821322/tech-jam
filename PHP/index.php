@@ -32,7 +32,7 @@
       <p class="explanation">「Team Task」<br>小規模なチームで利用することに適しているチームタスク管理アプリです。</p>
 
       <div class="login">
-        <a href="login.php"><input class="btn" type="button" value="ログイン"></a>
+        <button id="open-login" class="btn">ログイン</button>
         <div class="sign-up-btn">
           <a href="sign-up.php" class="sign-up">新規登録</a>
         </div>
@@ -40,6 +40,23 @@
     </div>
   </div>
 
+  <!-- モーダル化画面 -->
+
+  <div id="login-modal" class="modal">
+    <div class="box">
+      <h1>ログインページ</h1>
+      <span class="close-btn">&times;</span>
+      <form action="login_check.php" method="post">
+        <input type="email" name="email" required placeholder="Email"><br>
+        <input type="password" name="password" required placeholder="Password"><br>
+        <input type="submit" value="ログイン">
+      </form>
+    </div>
+  </div>
+
+
+
+  <script src="../JS/index.js"></script>
 </body>
 
 </html>

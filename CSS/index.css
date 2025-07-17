@@ -119,3 +119,83 @@ span {
     width: 100%;
     background-color: #0e32ff;
 }
+
+
+
+
+
+
+
+/* ====== モーダル　====== */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(34, 34, 34, 0.166);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal .close-btn {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.modal .close-btn:hover {
+  color: #0000003b;
+}
+
+
+/* ====== .box はすでにあるログイン用デザイン ====== */
+.modal .box {
+    position: relative; 
+  background: white;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.modal .box h1 {
+  margin-bottom: 30px;
+}
+
+.modal input[type="email"],
+.modal input[type="password"] {
+  width: 100%;
+  max-width: 430px;
+  padding: 12px;
+  margin-bottom: 17px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 0.5px solid #999;
+  background: transparent;
+}
+
+.modal input[type="submit"] {
+  width: 100%;
+  max-width: 440px;
+  margin-top: 25px;
+  padding: 12px;
+  font-size: 16px;
+  background: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal input[type="submit"]:hover {
+  opacity: 0.9;
+}
