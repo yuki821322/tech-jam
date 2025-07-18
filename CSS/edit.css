@@ -1,0 +1,75 @@
+/* 全体のレイアウト */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ボックス全体 */
+.box {
+    background-color: #ffffff;
+    box-shadow:0 0 10px 10px rgba(53, 53, 53, 0.097);
+    padding: 40px;
+    border-radius: 16px;
+    width: 400px;
+}
+
+/* 見出し */
+h1 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+/* ラベルと入力欄 */
+form p {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    color: #444444;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    border-color: #007acc;
+    outline: none;
+}
+
+/* ボタン */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #646464;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #a3a3a3;
+}
