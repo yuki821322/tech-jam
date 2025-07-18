@@ -60,7 +60,7 @@ fclose($fp);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/compleate.css">
+    <link rel="stylesheet" href="../CSS/index/compleate.css">
     <title>登録完了画面</title>
 </head>
 

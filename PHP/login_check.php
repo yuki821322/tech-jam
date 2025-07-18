@@ -3,8 +3,8 @@ session_start();
 
 $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
-
 $filename = '../CSV/user_data.csv';
+$login_success = false;
 
 if (($fp = fopen($filename, 'r')) !== false) {
     while (($row = fgetcsv($fp)) !== false) {
@@ -13,8 +13,8 @@ if (($fp = fopen($filename, 'r')) !== false) {
         $csv_password = trim($row[5]);
 
         if ($email === $csv_email && $password === $csv_password) {
-            fclose($fp);
             $_SESSION['csv_name'] = $csv_name;
+            fclose($fp);
             header('Location: ../PHPMAIN/from.php');
             exit;
         }
@@ -22,4 +22,6 @@ if (($fp = fopen($filename, 'r')) !== false) {
     fclose($fp);
 }
 
-echo "ログイン失敗：メールアドレスまたはパスワードが間違っています。";
+// 失敗したらエラー情報をつけて戻す
+header('Location: index.php?error=1');
+exit;

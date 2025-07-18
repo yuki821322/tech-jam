@@ -30,7 +30,7 @@ if (($fp = fopen($filename, 'r')) !== false) {
 <head>
     <meta charset="UTF-8">
     <title>メンバーリスト</title>
-    <link rel="stylesheet" href="../CSS/member_list.css">
+    <link rel="stylesheet" href="../CSS//list/member_list.css">
 </head>
 
 <body>

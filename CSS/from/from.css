@@ -1,0 +1,29 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+.sidebar{
+    width: 100%;
+    max-width: 300px;
+    background-color: pink;
+}
+
+
+.all{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.task{
+    max-width: 800px;
+    background-color: blue;
+}
+
+.progress{
+    max-width: 300px;
+    background-color: cadetblue;
+}
+
