@@ -3,11 +3,9 @@ body{
     padding: 0;
 }
 
-
-.sidebar{
+header{
     width: 100%;
-    max-width: 300px;
-    background-color: pink;
+    background-color: red;
 }
 
 
@@ -17,13 +15,23 @@ body{
     width: 100%;
 }
 
+.sidebar{
+    width: 100%;
+    max-width: 20%;
+    background-color: pink;
+}
+
 .task{
-    max-width: 800px;
+    width: 100%;
+    max-width: 50%;
     background-color: blue;
 }
 
 .progress{
-    max-width: 300px;
+    width: 100%;
+    max-width: 30%;
     background-color: cadetblue;
 }
+
+
 
