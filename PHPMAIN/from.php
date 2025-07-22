@@ -33,7 +33,10 @@ $csv_name = $_SESSION['csv_name'];
         <div class="task">
             <h1>タスク管理</h1>
         </div>
-        <div class="progress">プログレスバー</div>
+        <div class="progress">
+            <h1>プログレンスバー</h1>
+            <progress id="file" max="100" value="70">70%</progress>
+        </div>
     </div>
 </body>
 
