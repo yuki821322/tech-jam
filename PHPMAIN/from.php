@@ -18,16 +18,15 @@ $csv_name = $_SESSION['csv_name'];
     <header>
         <h1>tech-jam</h1>
     </header>
-    <h1>ようこそ、<?php echo htmlspecialchars($csv_name); ?> さん！</h1>
     <div class="all">
         <div class="sidebar">
             <ul>
-                <li>プロフィール</li>
+                <li><a href="../PHPMAIN/SIDEBAR/profile.php">プロフィール</a></li>
                 <li>ラベル</li>
-                <li>マイタスク</li>
-                <li>カレンダー</li>
+                <li><a href="../PHPMAIN/SIDEBAR/mytask.php">マイタスク</a></li>
+                <li><a href="../PHPMAIN/SIDEBAR/calendar.php">カレンダー</a></li>
                 <li>削除</li>
-                <li>会員詳細</li>
+                <li><a href="../LIST/member_list.php">会員詳細</a></li>
                 <li>お問合せ</li>
             </ul>
         </div>

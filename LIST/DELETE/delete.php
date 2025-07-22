@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('Asia/Tokyo'); // ← これを追加！
+
 $filename = '../../CSV/user_data.csv';
 $erased_filename = '../../CSV/erased.csv';
 $id = $_GET['id'] ?? '';
@@ -38,7 +40,7 @@ if (($fp = fopen($filename, 'w')) !== false) {
 
 // 削除したデータをerased.csvに追記（削除日時を追加）
 if (!empty($deleted_rows)) {
-    $now = date('Y-m-d H:i:s');
+    $now = date('Y年m月d日 H:i:s'); // ← これで日本時間になる
 
     // erased.csvのヘッダー（存在しなければ書く）
     if (!file_exists($erased_filename)) {

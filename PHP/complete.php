@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set('Asia/Tokyo');
 
-$registration_date = date('Y-m-d');
+$registration_date = date('Y年m月d日');
 $file_name = '../CSV/user_data.csv';
 
 // 既存の最大IDを調べる
@@ -25,7 +25,9 @@ $new_id = $max_id + 1;
 
 $user_name = $_POST['username'];
 $email = $_POST['email'];
-$birthday = $_POST['birthday'];
+$birthday_input = $_POST['birthday'];
+$birth_date = DateTime::createFromFormat('Y-m-d', $birthday_input);
+$birthday = $birth_date ? $birth_date->format('Y年m月d日') : '';
 $gender = $_POST['gender'];
 $password = $_POST['password'];
 

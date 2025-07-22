@@ -64,8 +64,12 @@ $gender_list = [
                 </tr>
             <?php endforeach; ?>
         </tbody>
-
     </table>
+    <p>
+        <a href="../member_list.php">
+            <button type="button">会員一覧表に戻る</button>
+        </a>
+    </p>
 </body>
 
 </html>

@@ -36,6 +36,7 @@ if (($fp = fopen($filename, 'r')) !== false) {
 <body>
     <div class="container">
         <h1>会員詳細</h1>
+        <a href="./DELETE/erased.php">削除済み一覧</a>
         <?php if (count($members) > 0): ?>
             <table>
                 <thead>

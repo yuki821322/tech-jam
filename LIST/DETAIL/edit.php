@@ -18,10 +18,12 @@ if (($fp = fopen($filename, 'r')) !== false) {
 
 // 該当メンバーを探す
 $target = null;
-foreach ($members as $row) {
-    if ($row[0] === $id) {
-        $target = $row;
-        break;
+if ($id !== '') {
+    foreach ($members as $row) {
+        if ($row[0] === $id) {
+            $target = $row;
+            break;
+        }
     }
 }
 
@@ -31,13 +33,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($row[0] === $_POST['id']) {
             $row[1] = $_POST['name'];
             $row[2] = $_POST['email'];
-            $row[3] = $_POST['birth'];
+
+            // 生年月日をフォーマットして保存
+            $birth_input = $_POST['birth'];
+            $birth_date = DateTime::createFromFormat('Y-m-d', $birth_input);
+            if ($birth_date) {
+                $row[3] = $birth_date->format('Y年m月d日');
+            } else {
+                $row[3] = '';
+            }
+
             $row[4] = $_POST['gender'];
             $row[5] = $_POST['password'];
             break;
         }
     }
-    unset($row); // 参照の開放
+    unset($row);
 
     if (($fp = fopen($filename, 'w')) !== false) {
         flock($fp, LOCK_EX);
@@ -51,6 +62,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     header('Location: ../member_list.php');
     exit;
+}
+
+// 📌 編集画面で生年月日を Y-m-d に変換して表示用にセット
+$birth_display = '';
+if ($target && !empty($target[3])) {
+    $birth_date = DateTime::createFromFormat('Y年m月d日', $target[3]);
+    if ($birth_date) {
+        $birth_display = $birth_date->format('Y-m-d');
+    }
 }
 ?>
 
@@ -72,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <p><span>名前</span><input type="text" name="name" value="<?php echo htmlspecialchars($target[1]); ?>"></p>
                 <p><span>メール</span><input type="email" name="email" value="<?php echo htmlspecialchars($target[2]); ?>"></p>
-                <p><span>生年月日</span><input type="date" name="birth" value="<?php echo htmlspecialchars($target[3]); ?>"></p>
+                <p><span>生年月日</span><input type="date" name="birth" value="<?php echo htmlspecialchars($birth_display); ?>"></p>
 
                 <?php
                 $gender_list = [
