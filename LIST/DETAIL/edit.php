@@ -1,12 +1,14 @@
 <?php
 $filename = '../../CSV/user_data.csv';
-$id = $_GET['id'] ?? '';
+
+// GET か POST から ID を取得
+$id = $_GET['id'] ?? ($_POST['id'] ?? '');
 $members = [];
 
-// 読み込み
+// CSV 読み込み
 if (($fp = fopen($filename, 'r')) !== false) {
     flock($fp, LOCK_SH);
-    $header = fgetcsv($fp);
+    $header = fgetcsv($fp); // ヘッダー読み飛ばし
     while ($row = fgetcsv($fp)) {
         $members[] = $row;
     }
@@ -29,14 +31,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($row[0] === $_POST['id']) {
             $row[1] = $_POST['name'];
             $row[2] = $_POST['email'];
+            $row[3] = $_POST['birth'];
+            $row[4] = $_POST['gender'];
+            $row[5] = $_POST['password'];
             break;
         }
     }
+    unset($row); // 参照の開放
 
-    // 書き込み
     if (($fp = fopen($filename, 'w')) !== false) {
         flock($fp, LOCK_EX);
-        fputcsv($fp, ['ID', '名前', 'メールアドレス', '登録日']);
+        fputcsv($fp, ['ID', '名前', 'メールアドレス', '生年月日', '性別', 'パスワード', '登録日']);
         foreach ($members as $row) {
             fputcsv($fp, $row);
         }
@@ -44,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         fclose($fp);
     }
 
-    header('Location: member_list.php');
+    header('Location: ../member_list.php');
     exit;
 }
 ?>
@@ -64,8 +69,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($target): ?>
             <form method="post">
                 <input type="hidden" name="id" value="<?php echo htmlspecialchars($target[0]); ?>">
-                <p>名前：<input type="text" name="name" value="<?php echo htmlspecialchars($target[1]); ?>"></p>
-                <p>メール：<input type="email" name="email" value="<?php echo htmlspecialchars($target[2]); ?>"></p>
+
+                <p><span>名前</span><input type="text" name="name" value="<?php echo htmlspecialchars($target[1]); ?>"></p>
+                <p><span>メール</span><input type="email" name="email" value="<?php echo htmlspecialchars($target[2]); ?>"></p>
+                <p><span>生年月日</span><input type="date" name="birth" value="<?php echo htmlspecialchars($target[3]); ?>"></p>
+
+                <?php
+                $gender_list = [
+                    0 => '未設定',
+                    1 => '男性',
+                    2 => '女性',
+                    9 => 'その他'
+                ];
+                ?>
+                <p><span>性別</span>
+                    <select name="gender">
+                        <?php foreach ($gender_list as $key => $value): ?>
+                            <option value="<?php echo $key; ?>" <?php if ($target[4] == $key) echo 'selected'; ?>>
+                                <?php echo htmlspecialchars($value); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </p>
+
+                <p><span>パスワード</span><input type="text" name="password" value="<?php echo htmlspecialchars($target[5]); ?>"></p>
+
                 <p><button type="submit">更新</button></p>
             </form>
         <?php else: ?>
