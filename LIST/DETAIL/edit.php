@@ -1,5 +1,5 @@
 <?php
-$filename = '../CSV/user_data.csv';
+$filename = '../../CSV/user_data.csv';
 $id = $_GET['id'] ?? '';
 $members = [];
 
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../CSS//list/edit.css">
+    <link rel="stylesheet" href="../../CSS/list/edit.css">
     <title>編集画面</title>
 </head>
 

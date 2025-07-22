@@ -42,23 +42,23 @@ if (($fp = fopen($filename, 'r')) !== false) {
                     <tr>
                         <th>ID</th>
                         <th>名前</th>
-                        <th>メールアドレス</th>
                         <th>登録日</th>
-                        <th>パスワード</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($members as $member): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($member[0], ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td><?php echo htmlspecialchars($member[1], ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td><?php echo htmlspecialchars($member[2], ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td><?php echo htmlspecialchars($member[3], ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td><?php echo htmlspecialchars($member[5], ENT_QUOTES, 'UTF-8'); ?></td>
                             <td>
-                                <a href="edit.php?id=<?php echo urlencode($member[0]); ?>">編集</a>
-                                <a href="delete.php?id=<?php echo urlencode($member[0]); ?>" onclick="return confirm('本当に削除しますか？');">削除</a>
+                                <a href="DETAIL/detail.php?id=<?php echo urlencode($member[0]); ?>">
+                                    <?php echo htmlspecialchars($member[0], ENT_QUOTES, 'UTF-8'); ?>
+                                </a>
+                            </td>
+                            <td><?php echo htmlspecialchars($member[1], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($member[3], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td>
+                                <a href="DETAIL/edit.php?id=<?php echo urlencode($member[0]); ?>">編集</a>
+                                <a href="./DELETE/delete.php?id=<?php echo urlencode($member[0]); ?>" onclick="return confirm('本当に削除しますか？');">削除</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

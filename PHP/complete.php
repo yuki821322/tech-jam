@@ -39,11 +39,12 @@ $record = [
     $registration_date
 ];
 
-// ファイルに追記
+/// ファイルサイズを fopen する前にチェックする
+$need_header = !file_exists($file_name) || filesize($file_name) === 0;
+
 $fp = fopen($file_name, 'a');
 if (flock($fp, LOCK_EX)) {
-    // ヘッダーがないファイルの場合はヘッダーを追加（ファイルサイズ0の場合）
-    if (filesize($file_name) === 0) {
+    if ($need_header) {
         fputcsv($fp, ['id', 'username', 'email', 'birthday', 'gender', 'password', 'registration_date']);
     }
     fputcsv($fp, $record);
@@ -52,6 +53,7 @@ if (flock($fp, LOCK_EX)) {
     echo 'ファイルのロックに失敗しました。';
 }
 fclose($fp);
+
 ?>
 
 <!DOCTYPE html>
@@ -64,13 +66,12 @@ fclose($fp);
     <title>登録完了画面</title>
 </head>
 
+
 <body>
-    <body>
-        <div class="container">
-            <h1>登録が完了しました。</h1>
-            <input type="button" value="トップページへ" onclick="location.href='index.php'">
-        </div>
-    </body>
+    <div class="container">
+        <h1>登録が完了しました。</h1>
+        <input type="button" value="トップページへ" onclick="location.href='index.php'">
+    </div>
 </body>
 
 </html>
