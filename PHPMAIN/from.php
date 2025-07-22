@@ -22,7 +22,11 @@ $csv_name = $_SESSION['csv_name'];
     <div class="all">
         <div class="sidebar">
             <ul>
+                <li>プロフィール</li>
+                <li>ラベル</li>
+                <li>マイタスク</li>
                 <li>カレンダー</li>
+                <li>削除</li>
                 <li>会員詳細</li>
                 <li>お問合せ</li>
             </ul>
