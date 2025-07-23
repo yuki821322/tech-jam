@@ -1,37 +1,57 @@
-body{
-    margin: 0;
-    padding: 0;
-}
+body {
+            margin: 0;
+            padding: 0;
+        }
 
-header{
-    width: 100%;
-    background-color: red;
-}
+        header {
+            width: 100%;
+            background-color: red;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
 
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+        }
 
-.all{
-    display: flex;
-    gap: 10px;
-    width: 100%;
-}
+        .hamburger span {
+            display: block;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+        }
 
-.sidebar{
-    width: 100%;
-    max-width: 20%;
-    background-color: pink;
-}
+        .all {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
 
-.task{
-    width: 100%;
-    max-width: 50%;
-    background-color: blue;
-}
+        .sidebar {
+            width: 100%;
+            max-width: 20%;
+            background-color: pink;
+            transition: transform 0.3s ease;
+        }
 
-.progress{
-    width: 100%;
-    max-width: 30%;
-    background-color: cadetblue;
-}
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
 
+        .task {
+            width: 100%;
+            max-width: 50%;
+            background-color: blue;
+        }
 
-
+        .progress {
+            width: 100%;
+            max-width: 30%;
+            background-color: cadetblue;
+        }

@@ -16,10 +16,15 @@ $csv_name = $_SESSION['csv_name'];
 
 <body>
     <header>
-        <h1>tech-jam</h1>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <h1 style="margin-left: 20px;">tech-jam</h1>
     </header>
     <div class="all">
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
             <ul>
                 <li><a href="../PHPMAIN/SIDEBAR/profile.php">プロフィール</a></li>
                 <li>ラベル</li>
@@ -38,6 +43,15 @@ $csv_name = $_SESSION['csv_name'];
             <progress id="file" max="100" value="70">70%</progress>
         </div>
     </div>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+    </script>
 </body>
+
 
 </html>
