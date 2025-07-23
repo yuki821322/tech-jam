@@ -24,7 +24,7 @@ $csv_name = $_SESSION['csv_name'];
         <h1 style="margin-left: 20px;">tech-jam</h1>
     </header>
     <div class="all">
-        <div class="sidebar" id="sidebar">
+        <div class="sidebar hidden" id="sidebar">
             <ul>
                 <li><a href="../PHPMAIN/SIDEBAR/profile.php">プロフィール</a></li>
                 <li>ラベル</li>
