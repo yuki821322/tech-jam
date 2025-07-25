@@ -1,58 +1,120 @@
 body {
-            margin: 0;
-            padding: 0;
-        }
+  margin: 0;
+  padding: 0;
+}
 
-        header {
-            width: 100%;
-            background-color: red;
-            display: flex;
-            align-items: center;
-            padding: 10px;
-        }
+header {
+  width: 100%;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1; /* ヘッダーの層 */
+}
 
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 20px;
-            cursor: pointer;
-        }
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  margin: 0 10px;
+  z-index: 11;
+}
 
-        .hamburger span {
-            display: block;
-            height: 3px;
-            background: #fff;
-            border-radius: 2px;
-        }
+.hamburger span {
+  display: block;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
 
-        .all {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-        }
+/* ← 斜め演出 */
+.hamburger span:nth-child(1) {
+  transform: rotate(5deg);
+}
 
-        .sidebar {
-            width: 100%;
-            max-width: 20%;
-            position: fixed;
-            background-color: pink;
-            transition: transform 0.3s ease;
-        }
+.hamburger span:nth-child(2) {
+  transform: rotate(0deg);
+}
 
-        .sidebar.hidden {
-            transform: translateX(-100%);
-        }
+.hamburger span:nth-child(3) {
+  transform: rotate(-5deg);
+}
 
-        .task {
-            width: 100%;
-            max-width: 80%;
-            background-color: blue;
-        }
+.all {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}
 
-        .progress {
-            width: 100%;
-            max-width: 30%;
-            background-color: cadetblue;
-        }
+.sidebar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: pink;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+  z-index: 10; /* ヘッダーより前 */
+}
+
+.sidebar.show {
+  transform: translateX(0);
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: black;
+}
+
+.sidebar li {
+  list-style: none;
+}
+
+.sidebar ul{
+    margin-top: 100px;
+}
+
+.task {
+  width: 100%;
+  max-width: 70%;
+  background-color: blue;
+}
+
+.progress {
+  width: 100%;
+  max-width: 30%;
+  background-color: cadetblue;
+}
+
+/* サイドバー内の × ボタン */
+.close-btn {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 30px;
+  left: 20px;   
+  cursor: pointer;
+  display: none;
+}
+
+.close-btn span {
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background: #000;
+  top: 50%;
+  left: 0;
+}
+
+.close-btn span:first-child {
+  transform: rotate(45deg);
+}
+
+.close-btn span:last-child {
+  transform: rotate(-45deg);
+}
