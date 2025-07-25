@@ -4,7 +4,6 @@ const closeBtn = document.getElementById('close-btn');
 
 hamburger.addEventListener('click', () => {
   sidebar.classList.add('show');
-  hamburger.style.display = 'none';
   closeBtn.style.display = 'block';
 });
 

@@ -29,19 +29,7 @@ header {
   background: #fff;
   border-radius: 2px;
   transition: all 0.3s ease;
-}
-
-/* ← 斜め演出 */
-.hamburger span:nth-child(1) {
-  transform: rotate(5deg);
-}
-
-.hamburger span:nth-child(2) {
-  transform: rotate(0deg);
-}
-
-.hamburger span:nth-child(3) {
-  transform: rotate(-5deg);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  
 }
 
 .all {
@@ -102,19 +90,32 @@ header {
   display: none;
 }
 
+.close-btn {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 33px;
+  left: 20px;
+  cursor: pointer;
+  display: none;
+}
+
 .close-btn span {
   position: absolute;
-  width: 30px;
+  width: 35px;
   height: 3px;
-  background: #000;
+  background: #ffffff;
   top: 50%;
-  left: 0;
+  left: 50%;
+  transform-origin: center;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.4); /* ← 影で奥行き */
 }
 
 .close-btn span:first-child {
-  transform: rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .close-btn span:last-child {
-  transform: rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
+
