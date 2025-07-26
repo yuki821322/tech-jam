@@ -38,6 +38,7 @@ $csv_name = $_SESSION['csv_name'];
                 <li>削除</li>
                 <li><a href="../LIST/member_list.php">会員詳細</a></li>
                 <li>お問合せ</li>
+                <li>ログアウト</li>
             </ul>
         </div>
         <div class="task">
