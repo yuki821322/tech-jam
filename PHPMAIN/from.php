@@ -32,7 +32,7 @@ $csv_name = $_SESSION['csv_name'];
             <ul>
                 <li><a href="../PHPMAIN/from.php">ホーム</a></li>
                 <li><a href="../PHPMAIN/SIDEBAR/profile.php">プロフィール</a></li>
-                <li>ラベル</li>
+                <li><a href="../PHPMAIN/SIDEBAR/add-task.php">タスク追加</a></li>
                 <li><a href="../PHPMAIN/SIDEBAR/mytask.php">マイタスク</a></li>
                 <li><a href="../PHPMAIN/SIDEBAR/calendar.php">カレンダー</a></li>
                 <li>削除</li>
