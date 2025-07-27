@@ -10,7 +10,7 @@
 <body>
     <h1>Task file</h1>
     <form action="" method="">
-        <p><input class="title" type="text" id="title" name="title" repuired placeholder="Title"></p>
+        <p><input class="title" type="text" id="title" name="title" repuired placeholder="タイトル"></p>
         <p><input class="deadline" type="date" id="deadline" name="deadline" repuired placeholder="YYYY/MM/DD"></p>
         <?php
         // 性別の項目を管理する連想配列を作る
@@ -27,7 +27,7 @@
                 <label for="gendar<?php echo $key; ?>"><?php echo $value; ?></label>
             <?php endforeach; ?>
         </p>
-        <p><textarea class="form" name="content" value="" rows="3" cols="20" wrap="hard" repuired placeholder="Content"></textarea></p>
+        <p><textarea class="form" name="content" value="" rows="3" cols="20" wrap="hard" repuired placeholder="内容"></textarea></p>
         <p><input type="submit" value="追加"></p>
     </form>
 </body>

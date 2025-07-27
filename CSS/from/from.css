@@ -1,57 +1,67 @@
 body {
   margin: 0;
-  padding: 0;
+  font-family: sans-serif;
 }
 
-header {
-  width: 100%;
-  background-color: red;
-  display: flex;
-  align-items: center;
-  position: relative;
-  z-index: 1; /* ヘッダーの層 */
-}
-
+/* ハンバーガー */
 .hamburger {
+  position: fixed;
+  top: 33px;
+  left: 20px;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 30px;
   height: 20px;
   cursor: pointer;
-  margin: 0 10px;
-  z-index: 11;
 }
 
-.hamburger span {
-  display: block;
+.bar {
   height: 3px;
-  background: #fff;
+  background: black;
   border-radius: 2px;
-  transition: all 0.3s ease;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  
+  transition: 0.3s ease;
 }
 
-.all {
-  display: flex;
-  gap: 30px;
-  width: 100%;
+.hamburger.active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
 }
 
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* サイドバー */
 .sidebar {
-  width: 250px;
-  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: pink;
-  transition: transform 0.3s ease;
+  width: 250px;
+  height: 100vh;
+  background: pink;
   transform: translateX(-100%);
-  z-index: 10; /* ヘッダーより前 */
+  transition: 0.3s ease;
+  z-index: 999;
+  padding-top: 80px;
 }
 
 .sidebar.show {
   transform: translateX(0);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 10px 20px;
 }
 
 .sidebar a {
@@ -59,63 +69,51 @@ header {
   color: black;
 }
 
-.sidebar li {
-  list-style: none;
+/* ヘッダー */
+header {
+  background-color: red;
+  color: white;
+  padding: 20px 60px;
 }
 
-.sidebar ul{
-    margin-top: 100px;
+header h1 {
+  margin: 0 0 0 40px;
+}
+
+/* メイン画面 */
+.all {
+  display: flex;
+  padding: 40px;
+  gap: 30px;
 }
 
 .task {
   width: 100%;
   max-width: 70%;
   background-color: blue;
+  color: white;
+  padding: 20px;
 }
 
 .progress {
   width: 100%;
   max-width: 30%;
   background-color: cadetblue;
+  color: white;
+  padding: 20px;
 }
 
-/* サイドバー内の × ボタン */
-.close-btn {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: 30px;
-  left: 20px;   
-  cursor: pointer;
-  display: none;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: none; 
+  z-index: 998;  
 }
 
-.close-btn {
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  top: 33px;
-  left: 20px;
-  cursor: pointer;
-  display: none;
+.overlay.show {
+  display: block;
 }
-
-.close-btn span {
-  position: absolute;
-  width: 35px;
-  height: 3px;
-  background: #ffffff;
-  top: 50%;
-  left: 50%;
-  transform-origin: center;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.4); /* ← 影で奥行き */
-}
-
-.close-btn span:first-child {
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.close-btn span:last-child {
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-

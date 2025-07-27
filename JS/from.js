@@ -1,14 +1,15 @@
-const hamburger = document.getElementById('hamburger');
-const sidebar = document.getElementById('sidebar');
-const closeBtn = document.getElementById('close-btn');
+const hamburger = document.getElementById("hamburger");
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
 
-hamburger.addEventListener('click', () => {
-  sidebar.classList.add('show');
-  closeBtn.style.display = 'block';
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("active");
+  sidebar.classList.toggle("show");
+  overlay.classList.toggle("show");
 });
 
-closeBtn.addEventListener('click', () => {
-  sidebar.classList.remove('show');
-  hamburger.style.display = 'flex';
-  closeBtn.style.display = 'none';
+overlay.addEventListener("click", () => {
+  sidebar.classList.remove("show");
+  hamburger.classList.remove("active");
+  overlay.classList.remove("show");
 });

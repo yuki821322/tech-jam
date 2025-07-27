@@ -16,39 +16,41 @@ $csv_name = $_SESSION['csv_name'];
 
 <body>
     <header>
+        <!-- ハンバーガーメニュー -->
         <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
         </div>
-        <h1 style="margin-left: 20px;">tech-jam</h1>
-    </header>
-    <div class="all">
-        <div class="sidebar hidden" id="sidebar">
-            <div class="close-btn" id="close-btn">
-                <span></span>
-                <span></span>
-            </div>
+
+        <!-- サイドバー -->
+        <div class="sidebar" id="sidebar">
             <ul>
                 <li><a href="../PHPMAIN/from.php">ホーム</a></li>
                 <li><a href="../PHPMAIN/SIDEBAR/profile.php">プロフィール</a></li>
                 <li><a href="../PHPMAIN/SIDEBAR/add-task.php">タスク追加</a></li>
                 <li><a href="../PHPMAIN/SIDEBAR/mytask.php">マイタスク</a></li>
                 <li><a href="../PHPMAIN/SIDEBAR/calendar.php">カレンダー</a></li>
-                <li>削除</li>
                 <li><a href="../LIST/member_list.php">会員詳細</a></li>
                 <li>お問合せ</li>
                 <li>ログアウト</li>
             </ul>
         </div>
+        <div class="overlay" id="overlay"></div>
+        <h1>tech-jam</h1>
+    </header>
+
+    <!-- メインエリア -->
+    <div class="all">
         <div class="task">
             <h1>タスク管理</h1>
         </div>
         <div class="progress">
-            <h1>プログレンスバー</h1>
+            <h1>プログレスバー</h1>
             <progress id="file" max="100" value="70">70%</progress>
         </div>
     </div>
+
     <script src="../JS/from.js"></script>
 </body>
 
