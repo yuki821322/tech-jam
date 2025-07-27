@@ -36,6 +36,9 @@ body {
   transform: translateY(-8px) rotate(-45deg);
 }
 
+
+
+
 /* サイドバー */
 .sidebar {
   position: fixed;
@@ -68,6 +71,12 @@ body {
   text-decoration: none;
   color: black;
 }
+
+.sidebar img{
+  width: 15px;
+  margin-right: 10px;
+}
+
 
 /* ヘッダー */
 header {

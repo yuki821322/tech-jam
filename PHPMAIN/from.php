@@ -26,11 +26,11 @@ $csv_name = $_SESSION['csv_name'];
         <!-- サイドバー -->
         <div class="sidebar" id="sidebar">
             <ul>
-                <li><a href="../PHPMAIN/from.php">ホーム</a></li>
-                <li><a href="../PHPMAIN/SIDEBAR/profile.php">プロフィール</a></li>
-                <li><a href="../PHPMAIN/SIDEBAR/add-task.php">タスク追加</a></li>
-                <li><a href="../PHPMAIN/SIDEBAR/mytask.php">マイタスク</a></li>
-                <li><a href="../PHPMAIN/SIDEBAR/calendar.php">カレンダー</a></li>
+                <li><a href="../PHPMAIN/from.php"><img src="../IMG/家のアイコン素材.png" alt="ホーム">ホーム</a></li>
+                <li><a href="../PHPMAIN/SIDEBAR/profile.php"><img src="../IMG/人物の無料素材.png" alt="プロフィール">プロフィール</a></li>
+                <li><a href="../PHPMAIN/SIDEBAR/add-task.php"><img src="../IMG/プラスのアイコン素材.png" alt="追加">タスク追加</a></li>
+                <li><a href="../PHPMAIN/SIDEBAR/mytask.php"><img src="../IMG/タスクトレイアイコン.png" alt="マイタスク">マイタスク</a></li>
+                <li><a href="../PHPMAIN/SIDEBAR/calendar.php"><img src="../IMG/カレンダーのフリーアイコン2.png" alt="カレンダー">カレンダー</a></li>
                 <li><a href="../LIST/member_list.php">会員詳細</a></li>
                 <li>お問合せ</li>
                 <li>ログアウト</li>
