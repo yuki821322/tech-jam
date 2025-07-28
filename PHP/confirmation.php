@@ -34,8 +34,8 @@
             <tr>
                 <th>生年月日</th>
                 <td><?php echo htmlspecialchars($birthday, ENT_QUOTES, 'UTF-8'); ?></td>
-            </tr>
-
+            </tr> 
+  
             <?php
             $gendar_list = [
                 1 => '男性',

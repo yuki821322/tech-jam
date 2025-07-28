@@ -1,7 +1,8 @@
 <?php
-// ファイルパス（とりあえず jointtask.csv から読み取る想定）
-$csv_file = '../../CSV/task-data.csv';
+// ファイルパス
+$csv_file = '../../CSV/jointtask.csv';
 
+// データ読み込み
 $data = [];
 if (file_exists($csv_file) && ($fp = fopen($csv_file, 'r')) !== false) {
     while (($row = fgetcsv($fp)) !== false) {
@@ -13,7 +14,7 @@ if (file_exists($csv_file) && ($fp = fopen($csv_file, 'r')) !== false) {
 }
 
 // デバッグ表示
-echo "<h1>mytask（自分が関わってるマルチタスク一覧）</h1>";
+echo "<h1>jointtask.csv の内容（マルチタスク）</h1>";
 echo "<pre>";
 var_dump($data);
 echo "</pre>";

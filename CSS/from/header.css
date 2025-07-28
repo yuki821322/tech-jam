@@ -1,6 +1,6 @@
 /* ハンバーガーメニュー */
 .hamburger {
-  position: fixed;
+  position: absolute;
   top: 33px;
   left: 20px;
   z-index: 9999;
@@ -33,12 +33,12 @@
 
 /* サイドバー */
 .sidebar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 250px;
-  height: 100vh;
-  background: pink;
+  height: 875px;
+  background: rgb(126, 163, 255);
   transform: translateX(-100%);
   transition: 0.3s ease;
   z-index: 999;
@@ -52,11 +52,11 @@
 .sidebar ul {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin-top: 35px;
 }
 
 .sidebar li {
-  padding: 10px 20px;
+  padding: 15px 30px;
 }
 
 .sidebar a {
@@ -93,7 +93,6 @@ header h1 {
 }
 /* ハンバーガーメニュー */
 .hamburger {
-  position: fixed;
   top: 33px;
   left: 20px;
   z-index: 9999;
@@ -106,7 +105,7 @@ header h1 {
 }
 
 .bar {
-  height: 3px;
+  height: 3.5px;
   background: black;
   border-radius: 2px;
   transition: 0.3s ease;
@@ -124,54 +123,6 @@ header h1 {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* サイドバー */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 250px;
-  height: 100vh;
-  background: pink;
-  transform: translateX(-100%);
-  transition: 0.3s ease;
-  z-index: 999;
-  padding-top: 80px;
-}
-
-.sidebar.show {
-  transform: translateX(0);
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar li {
-  padding: 10px 20px;
-}
-
-.sidebar a {
-  text-decoration: none;
-  color: black;
-}
-
-.sidebar img {
-  width: 15px;
-  margin-right: 10px;
-}
-
-/* ヘッダー */
-header {
-  background-color: red;
-  color: white;
-  padding: 20px 60px;
-}
-
-header h1 {
-  margin: 0 0 0 40px;
-}
 
 /* オーバーレイ */
 .overlay {
