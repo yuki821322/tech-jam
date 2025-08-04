@@ -5,15 +5,8 @@ $task_deadline = $_POST['task_deadline'] ?? '';
 $task_format_text = $_POST['task_format_text'] ?? '';
 $task_content = $_POST['task_content'] ?? '';
 
-// 利用形態の判定
-$is_multi = ($task_format_text === 'マルチ');
 
-// 保存先を分ける
-if ($is_multi) {
-    $csv_file = '../../CSV/jointtask.csv'; // マルチ用
-} else {
-    $csv_file = '../../CSV/task-data.csv'; // シングル用
-}
+$csv_file = '../../CSV/task-data.csv';
 
 // データ保存
 if (($fp = fopen($csv_file, 'a')) !== false) {

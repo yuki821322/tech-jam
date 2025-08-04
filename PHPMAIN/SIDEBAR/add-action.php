@@ -1,15 +1,9 @@
 <?php
-$task_format_map = [
-    1 => 'マルチ',
-    2 => 'シングル',
-];
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $task_title = $_POST['title'] ?? '';
     $task_deadline = $_POST['deadline'] ?? '';
-    $task_format_value = $_POST['format'] ?? '';
-    $task_format_text = $task_format_map[$task_format_value] ?? '不明';
     $task_content = $_POST['content'] ?? '';
 
     // CSVファイルに保存
@@ -47,15 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <td><?php echo htmlspecialchars($task_title, ENT_QUOTES, 'UTF-8'); ?></td>
         <th>期限</th>
         <td><?php echo htmlspecialchars($task_deadline, ENT_QUOTES, 'UTF-8'); ?></td>
-        <th>利用形態</th>
-        <td><?php echo htmlspecialchars($task_format_text, ENT_QUOTES, 'UTF-8'); ?></td>
         <th>内容</th>
         <td><?php echo htmlspecialchars($task_content, ENT_QUOTES, 'UTF-8'); ?></td>
     </table>
     <form action="add-complete.php" method="post">
         <input type="hidden" name="task_title" value="<?php echo htmlspecialchars($task_title, ENT_QUOTES, 'UTF-8'); ?>">
         <input type="hidden" name="task_deadline" value="<?php echo htmlspecialchars($task_deadline, ENT_QUOTES, 'UTF-8'); ?>">
-        <input type="hidden" name="task_format_text" value="<?php echo htmlspecialchars($task_format_text, ENT_QUOTES, 'UTF-8'); ?>">
         <input type="hidden" name="task_content" value="<?php echo htmlspecialchars($task_content, ENT_QUOTES, 'UTF-8'); ?>">
         <p>
             <input class="task-add-submit" type="submit" value="追加">

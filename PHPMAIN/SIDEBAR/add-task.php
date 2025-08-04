@@ -25,25 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <form action="add-action.php" method="post">
             <p><input class="title" type="text" id="title" name="title" required placeholder="タイトル"></p>
             <p><input class="deadline" type="date" id="deadline" name="deadline" required placeholder="YYYY/MM/DD"></p>
-            <?php
-            $format_list = [
-                1 => 'マルチ',
-                2 => 'シングル',
-            ];
-            ?>
-
-            <p>
-                <?php foreach ($format_list as $key => $value): ?>
-                    <input type="radio" name="format" id="format<?php echo $key; ?>"
-                        value="<?php echo $key; ?>" onclick="hyouji()">
-                    <label for="format<?php echo $key; ?>"><?php echo $value; ?></label>
-                <?php endforeach; ?>
-            </p>
-
             <p><textarea class="content" name="content" rows="3" cols="20" wrap="hard" required placeholder="内容"></textarea></p>
             <p><input type="submit" value="追加"></p>
         </form>
-
     </div>
 
     <script src="/tech-jam/JS/header.js"></script>
