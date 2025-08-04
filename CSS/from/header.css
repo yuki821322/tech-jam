@@ -38,7 +38,7 @@
   left: 0;
   width: 250px;
   height: 875px;
-  background: rgb(126, 163, 255);
+  background: rgb(44, 130, 205);
   transform: translateX(-100%);
   transition: 0.3s ease;
   z-index: 999;
@@ -55,13 +55,17 @@
   margin-top: 35px;
 }
 
+.sidebar img{
+  filter: brightness(0) invert(1);
+}
+
 .sidebar li {
   padding: 15px 30px;
 }
 
 .sidebar a {
   text-decoration: none;
-  color: black;
+  color: rgb(255, 254, 254);
 }
 
 .sidebar img {
@@ -71,7 +75,7 @@
 
 /* ヘッダー */
 header {
-  background-color: red;
+  background-color:#2589d0;
   color: white;
   padding: 20px 60px;
 }
@@ -106,7 +110,7 @@ header h1 {
 
 .bar {
   height: 3.5px;
-  background: black;
+  background: rgb(255, 255, 255);
   border-radius: 2px;
   transition: 0.3s ease;
 }

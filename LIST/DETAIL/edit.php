@@ -64,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// 📌 編集画面で生年月日を Y-m-d に変換して表示用にセット
 $birth_display = '';
 if ($target && !empty($target[3])) {
     $birth_date = DateTime::createFromFormat('Y年m月d日', $target[3]);

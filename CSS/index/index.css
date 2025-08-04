@@ -247,16 +247,16 @@ span {
 }
 
 .button-30:hover {
-    animation: anima-button-30 1s;
+    animation: anima-button-30 1.2s;
 }
 
 @keyframes anima-button-30 {
     0% {
-        box-shadow: 0 0 0 0 rgb(37 137 208 / 50%);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.799);
     }
 
     100% {
-        box-shadow: 0 0 0 1.2em white(0 0 0 / 0%);
+        box-shadow: 0 0 0 1em rgba(214, 214, 214, 0);
     }
 }
 

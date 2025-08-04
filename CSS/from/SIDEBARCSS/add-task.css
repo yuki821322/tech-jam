@@ -1,5 +1,138 @@
 body {
-  margin: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    font-size: 18px; /* 全体の文字サイズアップ */
 }
 
+.add-wrap {
+    max-width: 700px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 40px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    border-radius: 16px;
+}
+
+.add-wrap h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+form p {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 16px 18px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+    border-color: #2589d0;
+    box-shadow: 0 0 5px rgba(37, 137, 208, 0.3);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    background-color: #2589d0;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #1d6fa5;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    font-size: 18px; /* 全体の文字サイズアップ */
+}
+
+.add-wrap {
+    max-width: 700px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 40px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    border-radius: 16px;
+}
+
+.add-wrap h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+form p {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 16px 18px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+    border-color: #2589d0;
+    box-shadow: 0 0 5px rgba(37, 137, 208, 0.3);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    background-color: #2589d0;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #1d6fa5;
+}
