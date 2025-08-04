@@ -16,20 +16,20 @@
 <body>
   <header>
     <div class="top"></div>
-    <h2 class="title">Team-Task</h2>
+    <h2 class="title">Team Note</h2>
   </header>
   <div class="blue-line"></div>
   <div class="main-layout">
     <h1 class="main-title">
-      Let’s<br>
-      Create <br>
-      <span>Task.</span>
-    </h1>
+    Team 
+      <span>Note.</span>
 
 
+
+ </h1>
     <div class="container">
-      <b class="subtext">さぁ<br>Team Taskを始めよう</b>
-      <p class="explanation">「Team Task」<br>小規模なチームで利用することに適しているチームタスク管理アプリです。</p>
+      <b class="subtext">さぁ<br>Team Noteを始めよう</b>
+      <p class="explanation">「Team Note」<br>小規模なチームで利用することに適しているチームタスク管理アプリです。</p>
 
       <div class="login">
         <button id="open-login" class="btn">ログイン</button>

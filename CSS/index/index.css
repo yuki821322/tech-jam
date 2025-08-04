@@ -34,25 +34,29 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 60px 80px;
-    gap: 10px;
+    padding: 30px 40px;
+    gap: 70px;
     flex-wrap: wrap;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .main-title {
     line-height: 1.2;
+    /* 文字間を詰める */
+    letter-spacing: -10px;
     max-width: 500px;
     flex: 1;
     margin: auto;
-    font-size: 100px;
-    margin-left: 200px;
+    font-size: 180px;
+    margin-left: 60px;
+    margin-top: 40px;
     /* 黒線 */
-    border-bottom: 7px solid #000;
+    border-bottom: 8px solid #000;
 }
 
 span {
     color: hsl(226, 92%, 65%);
+    margin-left: 105px;
 }
 
 .container {
@@ -67,6 +71,7 @@ span {
     font-size: 25px;
     margin-bottom: 30px;
     display: block;
+
 }
 
 .explanation {
@@ -93,7 +98,7 @@ span {
     text-decoration: none;
 }
 
-@media (max-width: 700px) {
+/* @media (max-width: 700px) {
     .container {
         max-width: 100%;
     }
@@ -110,7 +115,7 @@ span {
         margin-top: 20px;
         border-bottom: none;
     }
-}
+} */
 
 /* スマホ用はここまで */
 .top {
