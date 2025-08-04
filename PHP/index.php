@@ -39,9 +39,7 @@
       </div>
     </div>
   </div>
-  <!-- モーダル化画面 -->
-
-  <!-- モーダル化画面 -->
+  
   <div id="login-modal" class="modal">
     <div class="box">
       <h1>ログインページ</h1>
