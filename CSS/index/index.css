@@ -5,14 +5,14 @@ body {
     margin: 0;
     height: 100vh;
     background: linear-gradient(to bottom right,
-            rgb(0, 170, 255) 0.3%,
-            white 20%,
-            white 30%,
-            white 40%,
-            white 50%,
-            white 60%,
-            white 80%,
-            #8b79fc 100%);
+            /* #ffffff 0.3%, */
+            hsl(205, 79%, 56%) 20%,
+            hsl(205, 79%, 56%) 30%,
+            hsl(205, 79%, 56%)40%,
+            hsl(205, 79%, 56%) 50%,
+            hsl(205, 79%, 56%) 60%,
+            hsl(205, 79%, 56%) 80%,
+            hsl(205, 79%, 56%));
     /* background-size: cover; */
     background-attachment: fixed;
 
@@ -47,15 +47,27 @@ header {
     max-width: 500px;
     flex: 1;
     margin: auto;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
     font-size: 180px;
     margin-left: 60px;
     margin-top: 40px;
+    color: #fff;
     /* 黒線 */
-    border-bottom: 8px solid #000;
+
+
+}
+
+.main-container {
+    display: flex;
+    border-bottom: 8px solid #fff;
 }
 
 span {
-    color: hsl(226, 92%, 65%);
+    /* color: hsl(226, 92%, 65%); */
+    color: #fff;
     margin-left: 105px;
 }
 
@@ -71,16 +83,18 @@ span {
     font-size: 25px;
     margin-bottom: 30px;
     display: block;
+    color: #fff;
 
 }
 
 .explanation {
     font-size: 20px;
     margin-bottom: 20px;
+    color: #fff;
 }
 
 .login {
-    margin-top: 10px;
+    margin-top: 60px;
     display: flex;
 }
 
@@ -124,7 +138,7 @@ span {
     left: 240px;
     height: 25px;
     width: 100%;
-    background-color: #0e32ff;
+    background-color: #fff;
 }
 
 
@@ -205,4 +219,77 @@ span {
 
 .modal input[type="submit"]:hover {
     opacity: 0.9;
+}
+
+
+
+
+/* .oswald-<uniquifier> {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+} */
+
+/* ログインボタン */
+.button-30 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 150px;
+    padding: .9em 2em;
+    border: 1px solid #2589d0;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #2589d0;
+    font-size: 1em;
+}
+
+.button-30:hover {
+    animation: anima-button-30 1s;
+}
+
+@keyframes anima-button-30 {
+    0% {
+        box-shadow: 0 0 0 0 rgb(37 137 208 / 50%);
+    }
+
+    100% {
+        box-shadow: 0 0 0 1.2em white(0 0 0 / 0%);
+    }
+}
+
+/* 新規登録ボタン */
+.button-51 {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100px;
+    margin: 0 auto;
+    padding: .9em 2em;
+    border: none;
+    border-bottom: 2px solid #e6edf3;
+    background-color: transparent;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+.button-51::after {
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: center left;
+    width: 100%;
+    height: 2px;
+    background-color: #2589d0;
+    content: '';
+    transition: transform .3s ease;
+}
+
+.button-51:hover::after {
+    transform: scaleX(1);
 }

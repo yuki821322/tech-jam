@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="../CSS//index/index.css">
 
 
@@ -20,6 +21,7 @@
   </header>
   <div class="blue-line"></div>
   <div class="main-layout">
+    <div class="main-container">
     <h1 class="main-title">
     Team 
       <span>Note.</span>
@@ -27,14 +29,17 @@
 
 
  </h1>
+ </div>
     <div class="container">
+      
       <b class="subtext">さぁ<br>Team Noteを始めよう</b>
       <p class="explanation">「Team Note」<br>小規模なチームで利用することに適しているチームタスク管理アプリです。</p>
 
       <div class="login">
-        <button id="open-login" class="btn">ログイン</button>
+        <button id="open-login"class="button-30" class="btn">ログイン</button>
+
         <div class="sign-up-btn">
-          <a href="sign-up.php" class="sign-up">新規登録</a>
+          <a href="sign-up.php" class="button-51" class="sign-up">新規登録</a>
         </div>
       </div>
     </div>
