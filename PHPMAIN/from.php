@@ -1,8 +1,13 @@
 <!-- http://localhost:8888/tech-jam/PHPMAIN/from.php -->
 <?php
 session_start();
+if (!isset($_SESSION['csv_name'])) {
+    header("Location: ../PHP/index.php");
+    exit;
+}
 $csv_name = $_SESSION['csv_name'];
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 

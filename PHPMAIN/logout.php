@@ -1,8 +1,10 @@
 <?php
-session_start();
+session_start(); // セッション開始
 
+// セッションの中身を削除
 $_SESSION = [];
 
+// Cookieの削除（セキュリティ対策）
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(
@@ -16,7 +18,9 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
+// セッションを破棄
 session_destroy();
 
-header("Location:../PHP/index.php");
+// ログインページなどにリダイレクト
+header("Location: ../PHP/index.php");
 exit;
