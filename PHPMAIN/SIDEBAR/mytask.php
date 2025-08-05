@@ -64,7 +64,7 @@ if (file_exists($csv_file) && ($fp = fopen($csv_file, 'r')) !== false) {
                                     <input type="hidden" name="id" value="<?= htmlspecialchars($task_id) ?>">
                                     <button type="submit">編集</button>
                                 </form>
-                                <form action="delete-task.php" method="post" style="display:inline;" onsubmit="return confirm('本当に削除しますか？');">
+                                <form action="mytask-delete.php" method="post" style="display:inline;" onsubmit="return confirm('本当に削除しますか？');">
                                     <input type="hidden" name="id" value="<?= htmlspecialchars($task_id) ?>">
                                     <button type="submit">削除</button>
                                 </form>
