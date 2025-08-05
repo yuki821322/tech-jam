@@ -62,7 +62,10 @@
   <br>
   <br>
   <br>
-  <div class="hr"></div>
+  <div class="hr1"></div>
+  <div class="hr2"></div>
+  <div class="hr3"></div>
+
   <script src="../JS/index.js?v=1.0"></script>
 </body>
 

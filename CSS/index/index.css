@@ -61,9 +61,21 @@ header {
     display: inline-block;
 }
 
-.hr {
+.hr1 {
     border: 5px solid rgb(255, 255, 255);
-    /* width: 1000px; */
+    width: 900px;
+}
+
+.hr2 {
+    border: 5px solid rgb(255, 255, 255);
+    margin-top: 50px;
+    width: 600px;
+}
+
+.hr3 {
+    border: 5px solid rgb(255, 255, 255);
+    margin-top: 50px;
+    width: 300px;
 }
 
 span {
