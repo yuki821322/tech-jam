@@ -50,9 +50,11 @@
                     <br>
                     <span>※パスワードが一致することを確認してください</span>
                 </p>
-                <p>
-                    <a href="confirmation.php"><input class="submit-button" type="submit" value="確認画面へ"></a>
-                </p>
+                <div class="btn-continer">
+                    <p>
+                        <a href="confirmation.php"><input class="button-30" type="submit" value="確認画面へ"></a>
+                    </p>
+                </div>
             </form>
         </div>
     </section>

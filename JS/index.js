@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
+// テキストスライド
 const title = document.querySelector('.main-title');
 const note = document.querySelector('.note');
 
