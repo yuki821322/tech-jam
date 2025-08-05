@@ -55,9 +55,6 @@ header {
     margin-left: 60px;
     margin-top: 40px;
     color: #fff;
-    /* 黒線 */
-
-
 }
 
 .main-container {
@@ -76,7 +73,6 @@ span {
     max-width: 550px;
     margin: auto;
     padding: 20px;
-
 }
 
 .subtext {
@@ -84,7 +80,6 @@ span {
     margin-bottom: 30px;
     display: block;
     color: #fff;
-
 }
 
 .explanation {
@@ -140,10 +135,6 @@ span {
     width: 100%;
     background-color: #fff;
 }
-
-
-
-
 
 
 
