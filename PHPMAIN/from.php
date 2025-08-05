@@ -1,4 +1,3 @@
-<!-- http://localhost:8888/tech-jam/PHPMAIN/from.php -->
 <?php
 session_start();
 if (!isset($_SESSION['csv_name'])) {
@@ -10,6 +9,8 @@ $csv_name = $_SESSION['csv_name'];
 
 <!DOCTYPE html>
 <html lang="ja">
+    
+<!-- http://localhost:8888/tech-jam/PHPMAIN/from.php -->
 
 <head>
     <meta charset="UTF-8">
