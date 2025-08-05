@@ -62,21 +62,28 @@ header {
 }
 
 .hr1 {
-    border: 5px solid rgb(255, 255, 255);
-    width: 900px;
+    border: 7px solid rgb(255, 255, 255);
+    width: 1250px;
 }
 
 .hr2 {
-    border: 5px solid rgb(255, 255, 255);
-    margin-top: 50px;
-    width: 600px;
+    border: 7px solid rgb(255, 255, 255);
+    margin-top: 100px;
+    width: 750px;
 }
 
 .hr3 {
-    border: 5px solid rgb(255, 255, 255);
-    margin-top: 50px;
-    width: 300px;
+    border: 7px solid rgb(255, 255, 255);
+    margin-top: 100px;
+    width: 450px;
 }
+
+.hr1, .hr2, .hr3 {
+  position: relative;
+  left: -1000px; /* ← 画面外に隠す */
+  transition: none;
+}
+
 
 span {
     /* color: hsl(226, 92%, 65%); */

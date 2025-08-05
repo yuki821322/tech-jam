@@ -62,6 +62,39 @@ function slideInNote() {
   }
 }
 
+
+const bars = [
+    { el: document.querySelector('.hr1'), pos: -5000, speed: 25, stop: 0 },
+    { el: document.querySelector('.hr2'), pos: -500, speed: 20, stop: 0 },
+    { el: document.querySelector('.hr3'), pos: -500, speed: 15, stop: 0 }
+  ];
+
+  function slideBar(index) {
+    if (!bars[index]) return;
+
+    const bar = bars[index];
+
+    function animate() {
+      bar.pos += bar.speed;
+      bar.el.style.left = bar.pos + 'px';
+
+      if (bar.pos < bar.stop) {
+        requestAnimationFrame(animate);
+      } else {
+        bar.el.style.left = bar.stop + 'px';
+
+        // 次のバーを遅れてスライド（500ms後）
+        setTimeout(() => slideBar(index + 1), 500);
+      }
+    }
+
+    animate();
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    slideBar(0); // 最初のバーから開始
+  });
+
 window.addEventListener("DOMContentLoaded", slideInTitle);
 
 
