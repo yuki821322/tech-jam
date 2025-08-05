@@ -27,3 +27,42 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+const title = document.querySelector('.main-title');
+const note = document.querySelector('.note');
+
+let titlePos = -1000;
+let notePos = -800;
+
+const titleSpeed = 20;
+const noteSpeed = 20;
+
+function slideInTitle() {
+  titlePos += titleSpeed;
+  title.style.left = titlePos + "px";
+
+  if (titlePos < 60) {
+    requestAnimationFrame(slideInTitle);
+  } else {
+    title.style.left = "60px";
+
+    // 少し遅れて Note. をスライド開始（500ms後）
+    setTimeout(slideInNote, 500);
+  }
+}
+
+function slideInNote() {
+  notePos += noteSpeed;
+  note.style.left = notePos + "px";
+
+  if (notePos < 0) {
+    requestAnimationFrame(slideInNote);
+  } else {
+    note.style.left = "0px";
+  }
+}
+
+window.addEventListener("DOMContentLoaded", slideInTitle);
+
+
+

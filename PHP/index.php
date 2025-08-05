@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="../CSS//index/index.css">
+  <link rel="stylesheet" href="../CSS/index/index.css">
 
 
   <title>tech-jam</title>
@@ -22,12 +22,8 @@
   <div class="blue-line"></div>
   <div class="main-layout">
     <div class="main-container">
-    <h1 class="main-title">
-    Team 
-      <span>Note.</span>
-
-
-
+    <h1 class="main-title">Team 
+      <span class="note">Note.</span>
  </h1>
  </div>
     <div class="container">
@@ -62,7 +58,12 @@
       </form>
     </div>
   </div>
-  <script src="../JS/index.js"></script>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="hr"></div>
+  <script src="../JS/index.js?v=1.0"></script>
 </body>
 
 </html>
