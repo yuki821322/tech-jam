@@ -22,7 +22,7 @@ if (file_exists($csv_file) && ($fp = fopen($csv_file, 'r')) !== false) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/tech-jam/CSS/from/header.css">
-    <link rel="stylesheet" href="/tech-jam/CSS/from/SIDEBARCSS/mytask.css?v=3.0">
+    <link rel="stylesheet" href="/tech-jam/CSS/from/SIDEBARCSS/mytask.css?v=2.0">
     <title>My Multi Tasks</title>
     <!-- http://localhost:8888/tech-jam/PHPMAIN/SIDEBAR/mytask.php -->
 </head>
@@ -30,7 +30,7 @@ if (file_exists($csv_file) && ($fp = fopen($csv_file, 'r')) !== false) {
 <body>
     <?php include '../header.php'; ?>
     <div class="task-list">
-        <h1>My Multi Tasks</h1>
+        <h1>My Task Note</h1>
         <?php if (count($data) > 0): ?>
             <table class="task-table">
                 <thead>
@@ -57,9 +57,10 @@ if (file_exists($csv_file) && ($fp = fopen($csv_file, 'r')) !== false) {
                         $formattedDate = $date ? $date->format('Y年n月j日') : htmlspecialchars($task_deadline);
                         ?>
                         <tr>
-                            <td><?= htmlspecialchars($task_title) ?></td>
-                            <td><?= $formattedDate ?></td>
-                            <td><?= nl2br(htmlspecialchars($task_content)) ?></td>
+                            <td class="title"><?= htmlspecialchars($task_title) ?></td>
+                            <td class="deadline"><?= $formattedDate ?></td>
+                            <td class="scroll"><div class="scroll-content"><?= nl2br(htmlspecialchars($task_content)) ?></div>
+                        </td>
                             <td class="task-actions">
                                 <form action="mytask-edit.php" method="get" style="display:inline;">
                                     <input type="hidden" name="id" value="<?= htmlspecialchars($task_id) ?>">
