@@ -66,7 +66,7 @@
   <div class="hr2"></div>
   <div class="hr3"></div>
 
-  <script src="../JS/index.js?v=1.0"></script>
+  <script src="../JS/index.js?v=3.0"></script>
 </body>
 
 </html>

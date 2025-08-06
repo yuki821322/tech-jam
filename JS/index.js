@@ -31,11 +31,11 @@ window.addEventListener('DOMContentLoaded', () => {
 const title = document.querySelector('.main-title');
 const note = document.querySelector('.note');
 
-let titlePos = -1000;
+let titlePos = -500;
 let notePos = -800;
 
-const titleSpeed = 20;
-const noteSpeed = 20;
+const titleSpeed = 10;
+const noteSpeed = 25;
 
 function slideInTitle() {
   titlePos += titleSpeed;
@@ -64,36 +64,28 @@ function slideInNote() {
 
 
 const bars = [
-    { el: document.querySelector('.hr1'), pos: -5000, speed: 25, stop: 0 },
-    { el: document.querySelector('.hr2'), pos: -500, speed: 20, stop: 0 },
-    { el: document.querySelector('.hr3'), pos: -500, speed: 15, stop: 0 }
-  ];
+  { el: document.querySelector('.hr1'), pos: -1000, speed: 25 },
+  { el: document.querySelector('.hr2'), pos: -900, speed: 18 },
+  { el: document.querySelector('.hr3'), pos: -800, speed: 12 }
+];
 
-  function slideBar(index) {
-    if (!bars[index]) return;
+function slideBar(bar) {
+  function animate() {
+    bar.pos += bar.speed;
+    bar.el.style.left = bar.pos + 'px';
 
-    const bar = bars[index];
-
-    function animate() {
-      bar.pos += bar.speed;
-      bar.el.style.left = bar.pos + 'px';
-
-      if (bar.pos < bar.stop) {
-        requestAnimationFrame(animate);
-      } else {
-        bar.el.style.left = bar.stop + 'px';
-
-        // 次のバーを遅れてスライド（500ms後）
-        setTimeout(() => slideBar(index + 1), 500);
-      }
+    if (bar.pos < 0) {
+      requestAnimationFrame(animate);
+    } else {
+      bar.el.style.left = '0px'; // ゴールでピタッと止める
     }
-
-    animate();
   }
+  animate();
+}
 
-  window.addEventListener("DOMContentLoaded", () => {
-    slideBar(0); // 最初のバーから開始
-  });
+window.addEventListener("DOMContentLoaded", () => {
+  bars.forEach(bar => slideBar(bar)); // 全て同時にスタート
+});
 
 window.addEventListener("DOMContentLoaded", slideInTitle);
 
