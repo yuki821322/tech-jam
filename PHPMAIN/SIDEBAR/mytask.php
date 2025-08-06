@@ -22,8 +22,9 @@ if (file_exists($csv_file) && ($fp = fopen($csv_file, 'r')) !== false) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/tech-jam/CSS/from/header.css">
-    <link rel="stylesheet" href="/tech-jam/CSS/from/SIDEBARCSS/mytask.css">
+    <link rel="stylesheet" href="/tech-jam/CSS/from/SIDEBARCSS/mytask.css?v=3.0">
     <title>My Multi Tasks</title>
+    <!-- http://localhost:8888/tech-jam/PHPMAIN/SIDEBAR/mytask.php -->
 </head>
 
 <body>
@@ -77,7 +78,6 @@ if (file_exists($csv_file) && ($fp = fopen($csv_file, 'r')) !== false) {
             <p>現在、表示できるマルチタスクはありません。</p>
         <?php endif; ?>
     </div>
-
     <script src="/tech-jam/JS/header.js"></script>
 </body>
 
