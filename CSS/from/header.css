@@ -75,10 +75,23 @@
 
 /* ヘッダー */
 header {
-  background-color:#2589d0;
+  position: fixed;         
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2589d0;
   color: white;
   padding: 20px 60px;
+  z-index: 1000;                
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /
 }
+
+/* スクロール時の下に余白入れる用（例: bodyやmain） */
+body {
+  margin: 0;
+  padding-top: 80px;           
+}
+
 
 header h1 {
   margin: 0 0 0 40px;

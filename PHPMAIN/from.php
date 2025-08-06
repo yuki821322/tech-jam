@@ -34,10 +34,10 @@ if (file_exists($project_csv) && ($fp = fopen($project_csv, 'r')) !== false) {
 }
 
 $task_csv = '../CSV/jointtask.csv';
-$tasks_by_project = []; // project_id => [task1, task2, ...]
+$tasks_by_project = [];
 
 if (file_exists($task_csv) && ($fp = fopen($task_csv, 'r')) !== false) {
-    $header = fgetcsv($fp); // ヘッダー読み飛ばし
+    $header = fgetcsv($fp);
     while (($row = fgetcsv($fp)) !== false) {
         if (count($row) < 5) continue;
 
@@ -49,7 +49,6 @@ if (file_exists($task_csv) && ($fp = fopen($task_csv, 'r')) !== false) {
             'creator' => $row[4]
         ];
 
-        // グループ化
         if (!isset($tasks_by_project[$project_id])) {
             $tasks_by_project[$project_id] = [];
         }
@@ -62,91 +61,70 @@ if (file_exists($task_csv) && ($fp = fopen($task_csv, 'r')) !== false) {
 <!DOCTYPE html>
 <html lang="ja">
 
-<!-- http://localhost:8888/tech-jam/PHPMAIN/from.php -->
-
 <head>
     <meta charset="UTF-8">
+    <title>ようこそ</title>
     <link rel="stylesheet" href="../CSS/from/from.css">
     <link rel="stylesheet" href="../CSS/from/header.css">
-    <title>ようこそ</title>
 </head>
 
 <body>
-
     <?php include '../PHPMAIN/header.php'; ?>
 
-    <!-- メインエリア -->
     <div class="all">
+        <!-- タスク一覧 -->
         <div class="task">
-            <h1>タスク管理</h1>
-            <div class="mytask-list">
-                <tbody>
-                    <?php foreach ($data as $task): ?>
-                        <?php
-                        if (count($task) < 4) {
-                            continue; // 必須の列が足りない行はスキップ
-                        }
+            <!-- 自分のタスク一覧 -->
+            <div class="section-title">My Task</div>
+            <div class="mytask-block">
+                <?php foreach ($data as $task): ?>
+                    <?php
+                    if (count($task) < 4) continue;
 
-                        $task_id = $task[0];
-                        $task_title = $task[1];
-                        $task_deadline = $task[2];
-                        $task_content = $task[3];
+                    $task_title = $task[1];
+                    $task_deadline = $task[2];
 
-                        $date = DateTime::createFromFormat('Y-m-d', $task_deadline);
-                        $formattedDate = $date ? $date->format('Y年n月j日') : htmlspecialchars($task_deadline);
-                        ?>
-                        <tr>
-                            <td><?= htmlspecialchars($task_title) ?></td>
-                            <td><?= $formattedDate ?></td>
-                            <td><?= nl2br(htmlspecialchars($task_content)) ?></td>
-                            <td class="task-actions">
-                                <form action="mytask-edit.php" method="get" style="display:inline;">
-                                    <input type="hidden" name="id" value="<?= htmlspecialchars($task_id) ?>">
-                                    <button type="submit">編集</button>
-                                </form>
-                                <form action="mytask-delete.php" method="post" style="display:inline;" onsubmit="return confirm('本当に削除しますか？');">
-                                    <input type="hidden" name="id" value="<?= htmlspecialchars($task_id) ?>">
-                                    <button type="submit">削除</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
-                </tbody>
+                    $date = DateTime::createFromFormat('Y-m-d', $task_deadline);
+                    $formattedDate = $date ? $date->format('Y年n月j日') : htmlspecialchars($task_deadline);
+                    ?>
+                    <div class="mytask-item">
+                        <strong><?= htmlspecialchars($task_title) ?></strong><br>
+                        締切: <?= $formattedDate ?>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <div class="jointtask-list">
-                <?php foreach ($projects as $project_id => $project_title): ?>
-                    <section style="margin-bottom: 2em;">
-                        <h2 style="color: navy;"><?php echo htmlspecialchars($project_title, ENT_QUOTES, 'UTF-8'); ?></h2>
 
+
+            <!-- プロジェクトごとのマルチタスク一覧 -->
+            <div class="section-title">Project Tasks</div>
+            <div class="jointtask-block">
+                <?php foreach ($projects as $project_id => $project_title): ?>
+                    <div class="jointtask-project">
+                        <h2><?= htmlspecialchars($project_title, ENT_QUOTES, 'UTF-8') ?></h2>
                         <?php if (empty($tasks_by_project[$project_id])): ?>
-                            <p style="color: gray;">このプロジェクトにはまだマルチタスクがありません。</p>
+                            <p class="no-tasks">このプロジェクトにはまだマルチタスクがありません。</p>
                         <?php else: ?>
-                            <ul>
-                                <?php foreach ($tasks_by_project[$project_id] as $task): ?>
-                                    <li>
-                                        <strong><?php echo htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8'); ?></strong>
-                                        （締切: <?php echo htmlspecialchars($task['deadline'], ENT_QUOTES, 'UTF-8'); ?>）
-                                        <br>作成者: <?php echo htmlspecialchars($task['creator'], ENT_QUOTES, 'UTF-8'); ?>
-                                        <ul>
-                                            <?php foreach ($task['subtasks'] as $subtask): ?>
-                                                <li><?php echo htmlspecialchars($subtask, ENT_QUOTES, 'UTF-8'); ?></li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
+                            <?php foreach ($tasks_by_project[$project_id] as $task): ?>
+                                <div class="jointtask-item">
+                                    <strong><?= htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8') ?></strong><br>
+                                    作成者: <?= htmlspecialchars($task['creator'], ENT_QUOTES, 'UTF-8') ?><br>
+                                    締切: <?= htmlspecialchars($task['deadline'], ENT_QUOTES, 'UTF-8') ?>
+                                </div>
+                            <?php endforeach; ?>
                         <?php endif; ?>
-                    </section>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </div>
+
+        <!-- 右側：進捗バー -->
         <div class="progress">
             <h1>プログレスバー</h1>
             <progress id="file" max="100" value="70">70%</progress>
         </div>
     </div>
-    <script src="../JS/header.js"></script>
 
+    <script src="../JS/header.js"></script>
 </body>
 
 </html>
