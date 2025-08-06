@@ -11,6 +11,12 @@
     <h1>Welcome to tech-jam</h1>
     <p>こんにtは</p>
     <p>ハロー</p>
+    <span class="task-content">
+    <strong><?= htmlspecialchars($task['title']) ?></strong><br>
+        担当: <?= htmlspecialchars($task['creator']) ?><br>
+        期限: <?= htmlspecialchars($task['deadline']) ?>
+        </span>
 </body>
+
 
 </html>
