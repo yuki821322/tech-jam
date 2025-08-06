@@ -225,7 +225,7 @@ span {
     margin-top: 25px;
     padding: 12px;
     font-size: 16px;
-    background: #4F46E5;
+    background: hsl(205, 79%, 56%);
     color: white;
     border: none;
     border-radius: 6px;
