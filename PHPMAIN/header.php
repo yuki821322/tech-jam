@@ -20,9 +20,7 @@ if (!isset($_SESSION['csv_name'])) {
     <div class="sidebar" id="sidebar">
         <ul>
             <li><a href="/tech-jam/PHPMAIN/from.php"><img src="/tech-jam/IMG/家のアイコン素材.png" alt="ホーム">Home</a></li>
-            <li><a href="/tech-jam/PHPMAIN/SIDEBAR/profile.php"><img src="/tech-jam/IMG/人物の無料素材.png" alt="プロフィール">Profile</a></li>
-            <li><a href="/tech-jam/PHPMAIN/SIDEBAR/add-task.php"><img src="/tech-jam/IMG/プラスのアイコン素材.png" alt="追加">Task 追加</a></li>
-            <li><a href="/tech-jam/PHPMAIN/SIDEBAR/add-project.php"><img src="/tech-jam/IMG/プラスのアイコン素材.png" alt="追加">Project 追加</a></li>
+            <li><a href="/tech-jam/PHPMAIN/SIDEBAR/add-task.php"><img src="/tech-jam/IMG/プラスのアイコン素材.png" alt="追加">Task・Project</a></li>
             <li><a href="/tech-jam/PHPMAIN/SIDEBAR/mytask.php"><img src="/tech-jam/IMG/タスクトレイのフリー素材.png" alt="マイタスク">Mytask ボックス</a></li>
             <li><a href="/tech-jam/PHPMAIN/SIDEBAR/jointtask.php"><img src="/tech-jam/IMG/チーム.png" alt="共同タスク">Teamtask ボックス</a></li>
             <li><a href="/tech-jam/PHPMAIN/SIDEBAR/calendar.php"><img src="/tech-jam/IMG/カレンダーのフリーアイコン2.png" alt="カレンダー">カレンダー</a></li>

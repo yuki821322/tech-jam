@@ -1,16 +1,19 @@
-const buttons = document.querySelectorAll('.tab-button');
-const sections = document.querySelectorAll('.form-section');
+document.addEventListener('DOMContentLoaded', function () {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const formSections = document.querySelectorAll('.form-section');
 
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        // タブボタン切り替え
-        buttons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // ボタン切り替え
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-        // 対象フォーム表示
-        const targetId = button.getAttribute('data-target');
-        sections.forEach(section => {
-            section.classList.toggle('active', section.id === targetId);
+            // フォーム切り替え
+            const target = button.getAttribute('data-target');
+            formSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(target).classList.add('active');
         });
     });
 });

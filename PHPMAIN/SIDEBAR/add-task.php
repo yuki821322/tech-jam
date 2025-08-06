@@ -1,4 +1,6 @@
 <?php
+// ========== add-task.php (タスク追加フォーム) ==========
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     echo "<pre>";
     var_dump($_POST);
@@ -10,6 +12,7 @@ $csv_file = '../../CSV/project.csv';
 // プロジェクト情報読み込み
 $projects = [];
 if (file_exists($csv_file) && ($fp = fopen($csv_file, 'r')) !== false) {
+    $header = fgetcsv($fp); // ヘッダー行をスキップ
     while (($row = fgetcsv($fp)) !== false) {
         if (count($row) >= 2) {
             $projects[] = ['id' => $row[0], 'title' => $row[1]];
@@ -38,6 +41,7 @@ if (file_exists($csv_file) && ($fp = fopen($csv_file, 'r')) !== false) {
         <!-- タブボタン -->
         <div class="tab-buttons">
             <button class="tab-button active" data-target="mytask-form">Mytask</button>
+            <button class="tab-button" data-target="project-form">Project</button>
             <button class="tab-button" data-target="teamtask-form">Teamtask</button>
         </div>
 
@@ -79,6 +83,15 @@ if (file_exists($csv_file) && ($fp = fopen($csv_file, 'r')) !== false) {
                 <p><input type="submit" value="マルチタスク追加"></p>
             </form>
         </div>
+
+        <!-- Project フォーム -->
+        <div class="form-section" id="project-form">
+            <form action="save-project.php" method="POST">
+                <p><input type="text" id="project_title" name="project_title" required placeholder="プロジェクト名を入力"></p>
+                <p><input type="submit" value="プロジェクト追加"></p>
+            </form>
+        </div>
+
     </div>
     <script src="/tech-jam/JS/header.js"></script>
     <script src="/tech-jam/JS/add-task.js"></script>

@@ -1,7 +1,88 @@
 body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f4f6f8;
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    font-size: 18px; /* 全体の文字サイズアップ */
+}
+
+h1 {
+    font-size: 26px;
+    text-align: center;
+    margin: 40px 0 20px;
+    color: #222;
+}
+
+.project-section {
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    background-color: #fff;
+    border-left: 6px solid #3b82f6;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.project-section h2 {
+    font-size: 20px;
+    color: #1e3a8a;
+    margin-top: 0;
+}
+
+.no-task {
+    color: #888;
+    font-style: italic;
+    margin-left: 10px;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.task-card {
+    background-color: #fefefe;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    transition: background-color 0.2s;
+}
+
+.task-card:hover {
+    background-color: #f9fafb;
+}
+
+.task-header {
+    margin-bottom: 10px;
+}
+
+.task-header strong {
+    font-size: 18px;
+    color: #111;
+}
+
+.task-header .deadline {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.task-header .creator {
+    font-size: 13px;
+    color: #666;
+    margin-top: 4px;
+}
+
+.subtask-list {
+    margin-left: 20px;
+    list-style-type: circle;
+    color: #444;
+}
+
+.subtask-list li {
+    font-size: 14px;
+    margin-bottom: 4px;
 }
