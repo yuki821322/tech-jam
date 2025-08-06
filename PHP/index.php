@@ -19,6 +19,7 @@
     <div class="top"></div>
     <h2 class="title">Team Note</h2>
   </header>
+  
   <div class="blue-line"></div>
   <div class="main-layout">
     <div class="main-container">
