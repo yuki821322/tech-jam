@@ -61,7 +61,7 @@ $task_content = $target[3] ?? '';
 <head>
     <meta charset="UTF-8" />
     <title>タスク編集</title>
-    <link rel="stylesheet" href="../../CSS/from/SIDEBARCSS/mytask.css" />
+    <link rel="stylesheet" href="../../CSS/from/SIDEBARCSS/mytask-edit.css" />
 </head>
 
 <body>
@@ -73,7 +73,7 @@ $task_content = $target[3] ?? '';
                 <p><span>タイトル</span><input type="text" name="title" value="<?= htmlspecialchars($task_title) ?>" required></p>
                 <p><span>期限</span><input type="date" name="deadline" value="<?= htmlspecialchars($task_deadline) ?>" required></p>
                 <p><span>内容</span><textarea name="content" rows="5" required><?= htmlspecialchars($task_content) ?></textarea></p>
-                <p><button type="submit">更新</button></p>
+                <p><button type="submit" class="button-30">更新</button></p>
             </form>
         <?php else: ?>
             <p>指定されたタスクが見つかりませんでした。</p>
