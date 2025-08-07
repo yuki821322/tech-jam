@@ -113,6 +113,65 @@ foreach ($projects as $project_id => $project_title) {
     <title>ようこそ</title>
     <link rel="stylesheet" href="../CSS/from/from.css">
     <link rel="stylesheet" href="../CSS/from/header.css">
+    <style>
+        /* 全体の横幅を狭く調整 */
+        .all {
+            max-width: 1000px !important;
+        }
+
+        .task {
+            max-width: 900px !important;
+            margin: 0 auto;
+        }
+
+        .add-task-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+            color: white !important;
+            text-decoration: none;
+            padding: 20px 35px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+            border: none;
+            cursor: pointer;
+            margin: 25px auto;
+            display: block;
+            width: fit-content;
+            min-width: 200px;
+        }
+
+        .add-task-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, #2980b9 0%, #27ae60 100%);
+            color: white !important;
+        }
+
+        .add-task-button::before {
+            content: '+';
+            font-size: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+            line-height: 1;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #64748b;
+        }
+
+        .empty-state p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
 </head>
 
 <body>
@@ -123,52 +182,74 @@ foreach ($projects as $project_id => $project_title) {
         <div class="task">
             <div class="section-title">My Task</div>
             <div class="mytask-block">
-                <?php foreach ($my_tasks as $task): ?>
-                    <div class="mytask-item">
-                        <strong><?= htmlspecialchars($task[1], ENT_QUOTES, 'UTF-8') ?></strong><br>
-                        締切: <?= formatDate($task[2]) ?>
+                <?php if (empty($my_tasks)): ?>
+                    <div class="empty-state">
+                        <p>まだタスクがありません</p>
+                        <a href="../PHPMAIN/SIDEBAR/add-task.php" class="add-task-button">タスクを追加</a>
                     </div>
-                <?php endforeach; ?>
+                <?php else: ?>
+                    <?php foreach ($my_tasks as $index => $task): ?>
+                        <?php $is_done = isset($task[3]) && $task[3] === '1'; ?>
+                        <div class="mytask-item <?= $is_done ? 'done-task' : '' ?>"
+                            onclick="toggleMyTask(<?= $index ?>)"
+                            style="cursor: pointer;">
+                            <strong><?= htmlspecialchars($task[1], ENT_QUOTES, 'UTF-8') ?></strong><br>
+                            締切: <?= formatDate($task[2]) ?>
+                        </div>
+                    <?php endforeach; ?>
+                    <a href="../PHPMAIN/SIDEBAR/add-task.php" class="add-task-button">タスクを追加</a>
+                <?php endif; ?>
             </div>
 
             <!-- プロジェクト別マルチタスク -->
             <div class="section-title">Project Tasks</div>
             <div class="jointtask-block">
-                <?php foreach ($projects as $project_id => $project_title): ?>
+                <?php if (empty($projects)): ?>
                     <div class="jointtask-project">
-                        <h2><?= htmlspecialchars($project_title, ENT_QUOTES, 'UTF-8') ?></h2>
-
-                        <!-- 各プロジェクトのプログレスバー -->
-                        <div class="project-progress">
-                            <progress id="progress-bar-<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>"
-                                max="100"
-                                value="<?= $project_progress[$project_id]['percent'] ?>">
-                                <?= $project_progress[$project_id]['percent'] ?>%
-                            </progress>
-                            <span id="progress-text-<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>">
-                                <?= $project_progress[$project_id]['percent'] ?>%
-                                (<?= $project_progress[$project_id]['done'] ?>/<?= $project_progress[$project_id]['total'] ?>)
-                            </span>
+                        <div class="empty-state">
+                            <p>まだプロジェクトがありません</p>
+                            <a href="../PHPMAIN/SIDEBAR/add-task.php" class="add-task-button">プロジェクトを追加</a>
                         </div>
-
-                        <?php $project_tasks = $tasks_by_project[$project_id] ?? []; ?>
-
-                        <?php if (empty($project_tasks)): ?>
-                            <p class="no-tasks">このプロジェクトにはまだマルチタスクがありません。</p>
-                        <?php else: ?>
-                            <?php foreach ($project_tasks as $index => $task): ?>
-                                <?php $is_done = $task['done'] === '1'; ?>
-                                <div class="jointtask-item <?= $is_done ? 'done-task' : '' ?>"
-                                    onclick="toggleTask('<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>', <?= $index ?>)"
-                                    style="cursor: pointer;">
-                                    <strong><?= htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8') ?></strong><br>
-                                    担当: <?= htmlspecialchars($task['creator'], ENT_QUOTES, 'UTF-8') ?><br>
-                                    期限: <?= formatDate($task['deadline']) ?>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
                     </div>
-                <?php endforeach; ?>
+                <?php else: ?>
+                    <?php foreach ($projects as $project_id => $project_title): ?>
+                        <div class="jointtask-project">
+                            <h2><?= htmlspecialchars($project_title, ENT_QUOTES, 'UTF-8') ?></h2>
+
+                            <!-- 各プロジェクトのプログレスバー -->
+                            <div class="project-progress">
+                                <progress id="progress-bar-<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>"
+                                    max="100"
+                                    value="<?= $project_progress[$project_id]['percent'] ?>">
+                                    <?= $project_progress[$project_id]['percent'] ?>%
+                                </progress>
+                                <span id="progress-text-<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>">
+                                    <?= $project_progress[$project_id]['percent'] ?>%
+                                    (<?= $project_progress[$project_id]['done'] ?>/<?= $project_progress[$project_id]['total'] ?>)
+                                </span>
+                            </div>
+
+                            <?php $project_tasks = $tasks_by_project[$project_id] ?? []; ?>
+
+                            <?php if (empty($project_tasks)): ?>
+                                <p class="no-tasks">このプロジェクトにはまだマルチタスクがありません。</p>
+                                <a href="../PHPMAIN/SIDEBAR/add-task.php" class="add-task-button">タスクを追加</a>
+                            <?php else: ?>
+                                <?php foreach ($project_tasks as $index => $task): ?>
+                                    <?php $is_done = $task['done'] === '1'; ?>
+                                    <div class="jointtask-item <?= $is_done ? 'done-task' : '' ?>"
+                                        onclick="toggleTask('<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>', <?= $index ?>)"
+                                        style="cursor: pointer;">
+                                        <strong><?= htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8') ?></strong><br>
+                                        担当: <?= htmlspecialchars($task['creator'], ENT_QUOTES, 'UTF-8') ?><br>
+                                        期限: <?= formatDate($task['deadline']) ?>
+                                    </div>
+                                <?php endforeach; ?>
+                                <a href="../PHPMAIN/SIDEBAR/add-task.php" class="add-task-button">タスクを追加</a>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -176,14 +257,18 @@ foreach ($projects as $project_id => $project_title) {
     <script src="/tech-jam/JS/header.js"></script>
     <script>
         // 各プロジェクトのタスク数を保持
-        let projectData = {
-            <?php foreach ($projects as $project_id => $project_title): ?> '<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>': {
+        let projectData = {};
+        <?php if (!empty($projects)): ?>
+            <?php $i = 0;
+            $total = count($projects); ?>
+            <?php foreach ($projects as $project_id => $project_title): ?>
+                projectData['<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>'] = {
                     total: <?= $project_progress[$project_id]['total'] ?>,
                     done: <?= $project_progress[$project_id]['done'] ?>
-                }
-                <?= end($projects) === $project_title ? '' : ',' ?>
+                };
+                <?php $i++; ?>
             <?php endforeach; ?>
-        };
+        <?php endif; ?>
 
         function updateProjectProgressBar(projectId) {
             const data = projectData[projectId];
@@ -197,23 +282,110 @@ foreach ($projects as $project_id => $project_title) {
             }
         }
 
-        function toggleTask(projectId, taskIndex) {
-            const taskElement = event.target.closest('.jointtask-item');
-            const wasDone = taskElement.classList.contains('done-task');
+        function toggleMyTask(taskIndex) {
+            const taskElements = document.querySelectorAll('.mytask-item');
+            const taskElement = taskElements[taskIndex];
 
-            // 取り消し線のトグル
-            if (wasDone) {
-                taskElement.classList.remove('done-task');
-                projectData[projectId].done--; // 完了数を減らす
-            } else {
-                taskElement.classList.add('done-task');
-                projectData[projectId].done++; // 完了数を増やす
+            if (!taskElement || taskElement.dataset.processing === 'true') {
+                return;
             }
 
-            // そのプロジェクトのプログレスバーを即座に更新
+            const wasDone = taskElement.classList.contains('done-task');
+
+            console.log('Toggling my task:', taskIndex, 'wasDone:', wasDone);
+
+            // 処理中フラグを設定
+            taskElement.dataset.processing = 'true';
+            taskElement.style.pointerEvents = 'none';
+            taskElement.style.opacity = '0.7';
+
+            // UI を即座に更新
+            if (wasDone) {
+                taskElement.classList.remove('done-task');
+            } else {
+                taskElement.classList.add('done-task');
+            }
+
+            // サーバーに状態を送信
+            const formData = new FormData();
+            formData.append('task_index', taskIndex);
+            formData.append('done', wasDone ? '0' : '1');
+
+            fetch('mytask-check.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    console.log('My task response status:', response.status);
+
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            throw new Error(`HTTP ${response.status}: ${text}`);
+                        });
+                    }
+
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        return response.json();
+                    }
+
+                    return {
+                        success: true
+                    };
+                })
+                .then(data => {
+                    console.log('My task success:', data);
+                })
+                .catch(error => {
+                    console.error('Error updating my task:', error);
+
+                    // エラーが発生した場合は元に戻す
+                    if (wasDone) {
+                        taskElement.classList.add('done-task');
+                    } else {
+                        taskElement.classList.remove('done-task');
+                    }
+
+                    alert('タスクの更新に失敗しました。ページを再読み込みしてください。\nエラー: ' + error.message);
+                })
+                .finally(() => {
+                    // 処理完了後にフラグを解除
+                    taskElement.dataset.processing = 'false';
+                    taskElement.style.pointerEvents = '';
+                    taskElement.style.opacity = '';
+                });
+        }
+
+        function toggleTask(projectId, taskIndex) {
+            const taskElement = event.target.closest('.jointtask-item');
+
+            // 既に処理中の場合は無視
+            if (taskElement.dataset.processing === 'true') {
+                return;
+            }
+
+            const wasDone = taskElement.classList.contains('done-task');
+
+            console.log('Toggling task:', projectId, taskIndex, 'wasDone:', wasDone);
+
+            // 処理中フラグを設定
+            taskElement.dataset.processing = 'true';
+            taskElement.style.pointerEvents = 'none';
+            taskElement.style.opacity = '0.7';
+
+            // UI を即座に更新
+            if (wasDone) {
+                taskElement.classList.remove('done-task');
+                projectData[projectId].done--;
+            } else {
+                taskElement.classList.add('done-task');
+                projectData[projectId].done++;
+            }
+
+            // プログレスバーを更新
             updateProjectProgressBar(projectId);
 
-            // サーバーに状態を送信（非同期）
+            // サーバーに状態を送信
             const formData = new FormData();
             formData.append('project_id', projectId);
             formData.append('task_index', taskIndex);
@@ -223,20 +395,59 @@ foreach ($projects as $project_id => $project_title) {
             }
 
             fetch('task-check.php', {
-                method: 'POST',
-                body: formData
-            }).catch(error => {
-                console.error('Error:', error);
-                // エラーが発生した場合は元に戻す
-                if (wasDone) {
-                    taskElement.classList.add('done-task');
-                    projectData[projectId].done++;
-                } else {
-                    taskElement.classList.remove('done-task');
-                    projectData[projectId].done--;
-                }
-                updateProjectProgressBar(projectId);
-            });
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            throw new Error(`HTTP ${response.status}: ${text}`);
+                        });
+                    }
+
+                    // JSON レスポンスの場合
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        return response.json();
+                    }
+
+                    // 成功（リダイレクトレスポンスの場合）
+                    return {
+                        success: true
+                    };
+                })
+                .then(data => {
+                    console.log('Success:', data);
+
+                    if (data.backup_file) {
+                        console.log('Backup created:', data.backup_file);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating task:', error);
+
+                    // エラーが発生した場合は元に戻す
+                    if (wasDone) {
+                        taskElement.classList.add('done-task');
+                        projectData[projectId].done++;
+                    } else {
+                        taskElement.classList.remove('done-task');
+                        projectData[projectId].done--;
+                    }
+
+                    updateProjectProgressBar(projectId);
+
+                    // ユーザーにエラーを通知
+                    alert('タスクの更新に失敗しました。ページを再読み込みしてください。\nエラー: ' + error.message);
+                })
+                .finally(() => {
+                    // 処理完了後にフラグを解除
+                    taskElement.dataset.processing = 'false';
+                    taskElement.style.pointerEvents = '';
+                    taskElement.style.opacity = '';
+                });
         }
     </script>
 </body>

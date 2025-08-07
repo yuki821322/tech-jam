@@ -1,21 +1,25 @@
 <?php
 // ========== jointtask.php (マルチタスク一覧表示) ==========
 
+// UTF-8 BOM除去関数
+function removeBom($str)
+{
+    return preg_replace('/^\xEF\xBB\xBF/', '', $str);
+}
+
 // ユーザーデータを読み込む
 $user_csv = '../../CSV/user_data.csv';
 $users = [];
 
 if (file_exists($user_csv) && ($fp = fopen($user_csv, 'r')) !== false) {
-    $header = fgetcsv($fp); // ヘッダー行をスキップ
-
-    // UTF-8 BOM が入ってる場合、強制的に削除
+    $header = fgetcsv($fp);
     if (!empty($header)) {
-        $header[0] = preg_replace('/^\xEF\xBB\xBF/', '', $header[0]);
+        $header[0] = removeBom($header[0]);
     }
 
     while (($row = fgetcsv($fp)) !== false) {
         if (count($row) >= 2) {
-            $users[$row[0]] = $row[1]; // ID => 名前 の連想配列に
+            $users[$row[0]] = $row[1];
         }
     }
     fclose($fp);
@@ -26,16 +30,14 @@ $project_csv = '../../CSV/project.csv';
 $projects = [];
 
 if (file_exists($project_csv) && ($fp = fopen($project_csv, 'r')) !== false) {
-    $header = fgetcsv($fp); // ヘッダー行をスキップ
-
-    // UTF-8 BOM が入ってる場合、強制的に削除
+    $header = fgetcsv($fp);
     if (!empty($header)) {
-        $header[0] = preg_replace('/^\xEF\xBB\xBF/', '', $header[0]);
+        $header[0] = removeBom($header[0]);
     }
 
     while (($row = fgetcsv($fp)) !== false) {
         if (count($row) >= 2) {
-            $projects[$row[0]] = $row[1]; // ID => タイトル の連想配列に
+            $projects[$row[0]] = $row[1];
         }
     }
     fclose($fp);
@@ -44,34 +46,41 @@ if (file_exists($project_csv) && ($fp = fopen($project_csv, 'r')) !== false) {
 // マルチタスク一覧を読み込む
 $task_csv = '../../CSV/jointtask.csv';
 $tasks_by_project = [];
-$task_counter = 0; // 各タスクにユニークなIDを付与
+$task_counter = 0;
 
 if (file_exists($task_csv) && ($fp = fopen($task_csv, 'r')) !== false) {
     $header = fgetcsv($fp);
-
-    // UTF-8 BOM が入ってる場合、強制的に削除
     if (!empty($header)) {
-        $header[0] = preg_replace('/^\xEF\xBB\xBF/', '', $header[0]);
+        $header[0] = removeBom($header[0]);
     }
 
     while (($row = fgetcsv($fp)) !== false) {
+        // 最低5列必要、6列目（done）はオプション
         if (count($row) < 5) continue;
 
-        // UTF-8 BOM が入ってる場合、ここでも念のため除去
-        $row[0] = preg_replace('/^\xEF\xBB\xBF/', '', $row[0]);
+        // 各要素のBOM除去とtrim処理
+        foreach ($row as $key => $value) {
+            $row[$key] = trim(removeBom($value));
+        }
+
+        // 列数が足りない場合は空文字で埋める（done列対応）
+        while (count($row) < 6) {
+            $row[] = '';
+        }
 
         $project_id = $row[0];
-        $creator_id = $row[4]; // 作成者のユーザーID
-        $creator_name = isset($users[$creator_id]) ? $users[$creator_id] : $creator_id; // IDから名前を取得、見つからない場合はIDをそのまま表示
+        $creator_id = $row[4];
+        $creator_name = isset($users[$creator_id]) ? $users[$creator_id] : $creator_id;
 
         $task = [
-            'id' => $task_counter++, // ユニークなタスクID
+            'id' => $task_counter++,
             'title' => $row[1],
             'deadline' => $row[2],
-            'subtasks' => array_filter(explode('|', $row[3])), // 空の要素を除去
-            'creator' => $creator_name, // 名前を設定
-            'creator_id' => $creator_id, // 必要に応じてIDも保持
-            'project_id' => $project_id
+            'subtasks' => array_filter(explode('|', $row[3])),
+            'creator' => $creator_name,
+            'creator_id' => $creator_id,
+            'project_id' => $project_id,
+            'done' => $row[5] // done状態を追加
         ];
 
         if (!isset($tasks_by_project[$project_id])) {
@@ -128,6 +137,12 @@ function isOverdue($dateString)
     <title>マルチタスク一覧</title>
     <link rel="stylesheet" href="/tech-jam/CSS/from/header.css">
     <link rel="stylesheet" href="/tech-jam/CSS/from/SIDEBARCSS/jointtask.css">
+    <style>
+        .task-card.done-task {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+    </style>
 </head>
 
 <body>
@@ -142,8 +157,11 @@ function isOverdue($dateString)
                 <p class="no-task">このプロジェクトにはまだマルチタスクがありません。</p>
             <?php else: ?>
                 <div class="task-list">
-                    <?php foreach ($tasks_by_project[$project_id] as $task): ?>
-                        <div class="task-card">
+                    <?php foreach ($tasks_by_project[$project_id] as $index => $task): ?>
+                        <?php $is_done = $task['done'] === '1'; ?>
+                        <div class="task-card <?= $is_done ? 'done-task' : '' ?>"
+                            onclick="toggleTask('<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>', <?= $index ?>)"
+                            style="cursor: pointer;">
                             <div class="task-header">
                                 <strong><?php echo htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8'); ?></strong>
                                 <span class="deadline">（締切: <?php echo htmlspecialchars($task['deadline'], ENT_QUOTES, 'UTF-8'); ?>）</span>
@@ -168,6 +186,41 @@ function isOverdue($dateString)
     <?php endforeach; ?>
 
     <script src="/tech-jam/JS/header.js"></script>
+    <script>
+        function toggleTask(projectId, taskIndex) {
+            const taskElement = event.target.closest('.task-card');
+            const wasDone = taskElement.classList.contains('done-task');
+
+            // 取り消し線のトグル
+            if (wasDone) {
+                taskElement.classList.remove('done-task');
+            } else {
+                taskElement.classList.add('done-task');
+            }
+
+            // サーバーに状態を送信（非同期）
+            const formData = new FormData();
+            formData.append('project_id', projectId);
+            formData.append('task_index', taskIndex);
+
+            if (!wasDone) {
+                formData.append('done', '1');
+            }
+
+            fetch('../../PHP/task-check.php', {
+                method: 'POST',
+                body: formData
+            }).catch(error => {
+                console.error('Error:', error);
+                // エラーが発生した場合は元に戻す
+                if (wasDone) {
+                    taskElement.classList.add('done-task');
+                } else {
+                    taskElement.classList.remove('done-task');
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
