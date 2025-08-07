@@ -6,15 +6,14 @@ body {
     height: 100vh;
     font-family: sans-serif;
     background: linear-gradient(to bottom right,
-            rgb(0, 170, 255) 0.3%,
-            white 20%,
-            white 30%,
-            white 40%,
-            white 50%,
-            white 60%,
-            white 80%,
-            #8b79fc 100%);
-             background-attachment: fixed;
+            hsl(205, 79%, 56%) 20%,
+            hsl(205, 79%, 56%) 30%,
+            hsl(205, 79%, 56%)40%,
+            hsl(205, 79%, 56%) 50%,
+            hsl(205, 79%, 56%) 60%,
+            hsl(205, 79%, 56%) 80%,
+            hsl(205, 79%, 56%));
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +24,7 @@ body {
     background: white;
     padding: 100px 110px;
     border-radius: 15px;
-    box-shadow:0 0 10px 10px rgba(53, 53, 53, 0.097);
+    box-shadow: 0 0 10px 10px rgba(53, 53, 53, 0.097);
 }
 
 h1 {
