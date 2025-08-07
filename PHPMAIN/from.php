@@ -63,8 +63,17 @@ if (file_exists($joint_csv) && ($fp = fopen($joint_csv, 'r')) !== false) {
     while (($row = fgetcsv($fp)) !== false) {
         if (count($row) < 5) continue;
 
-        $project_id = removeBom($row[0]);
-        $row = array_pad($row, 6, '0'); // 6列そろえる
+        // 各要素のBOM除去とtrim処理
+        foreach ($row as $key => $value) {
+            $row[$key] = trim(removeBom($value));
+        }
+
+        // 列数が足りない場合は空文字で埋める
+        while (count($row) < 6) {
+            $row[] = '';
+        }
+
+        $project_id = $row[0];
         $tasks_by_project[$project_id][] = [
             'title' => $row[1],
             'deadline' => $row[2],
@@ -93,6 +102,46 @@ $progress_percent = $total_tasks > 0 ? round(($done_tasks / $total_tasks) * 100)
     <meta charset="UTF-8">
     <title>ようこそ</title>
     <link rel="stylesheet" href="../CSS/from/from.css">
+    <style>
+        /* プログレスバーのスタイル改善 */
+        progress {
+            width: 100%;
+            height: 30px;
+            -webkit-appearance: none;
+            appearance: none;
+            border: 2px solid #ffffff;
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        progress::-webkit-progress-bar {
+            background-color: #ffffff;
+            border-radius: 12px;
+        }
+
+        progress::-webkit-progress-value {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ffa726, #66bb6a);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+        }
+
+        progress::-moz-progress-bar {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ffa726, #66bb6a);
+            border-radius: 12px;
+        }
+
+        /* プログレスバーのテキストスタイル */
+        #progress-text {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+    </style>
     <link rel="stylesheet" href="../CSS/from/header.css">
 </head>
 
@@ -125,17 +174,12 @@ $progress_percent = $total_tasks > 0 ? round(($done_tasks / $total_tasks) * 100)
                         <?php else: ?>
                             <?php foreach ($project_tasks as $index => $task): ?>
                                 <?php $is_done = $task['done'] === '1'; ?>
-                                <div class="jointtask-item <?= $is_done ? 'done-task' : '' ?>">
-                                    <form method="POST" action="task-check.php">
-                                        <input type="hidden" name="project_id" value="<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>">
-                                        <input type="hidden" name="task_index" value="<?= $index ?>">
-                                        <input type="checkbox" name="done" value="1" <?= $is_done ? 'checked' : '' ?> onchange="this.form.submit()">
-                                        <span>
-                                            <strong><?= htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8') ?></strong><br>
-                                            担当: <?= htmlspecialchars($task['creator'], ENT_QUOTES, 'UTF-8') ?><br>
-                                            期限: <?= formatDate($task['deadline']) ?>
-                                        </span>
-                                    </form>
+                                <div class="jointtask-item <?= $is_done ? 'done-task' : '' ?>"
+                                    onclick="toggleTask('<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>', <?= $index ?>)"
+                                    style="cursor: pointer;">
+                                    <strong><?= htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8') ?></strong><br>
+                                    担当: <?= htmlspecialchars($task['creator'], ENT_QUOTES, 'UTF-8') ?><br>
+                                    期限: <?= formatDate($task['deadline']) ?>
                                 </div>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -147,12 +191,67 @@ $progress_percent = $total_tasks > 0 ? round(($done_tasks / $total_tasks) * 100)
         <!-- プログレスバー -->
         <div class="progress">
             <h1>プログレスバー</h1>
-            <progress id="file" max="100" value="<?= $progress_percent ?>"><?= $progress_percent ?>%</progress>
-            <p><?= $progress_percent ?>%</p>
+            <progress id="progress-bar" max="100" value="<?= $progress_percent ?>"><?= $progress_percent ?>%</progress>
+            <p id="progress-text"><?= $progress_percent ?>% (<?= $done_tasks ?>/<?= $total_tasks ?>)</p>
         </div>
     </div>
 
     <script src="/tech-jam/JS/header.js"></script>
+    <script>
+        let totalTasks = <?= $total_tasks ?>;
+        let doneTasks = <?= $done_tasks ?>;
+
+        function updateProgressBar() {
+            const progressPercent = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+
+            progressBar.value = progressPercent;
+            progressText.textContent = progressPercent + '% (' + doneTasks + '/' + totalTasks + ')';
+        }
+
+        function toggleTask(projectId, taskIndex) {
+            const taskElement = event.target.closest('.jointtask-item');
+            const wasDone = taskElement.classList.contains('done-task');
+
+            // 取り消し線のトグル
+            if (wasDone) {
+                taskElement.classList.remove('done-task');
+                doneTasks--; // 完了数を減らす
+            } else {
+                taskElement.classList.add('done-task');
+                doneTasks++; // 完了数を増やす
+            }
+
+            // プログレスバーを即座に更新
+            updateProgressBar();
+
+            // サーバーに状態を送信（非同期）
+            const formData = new FormData();
+            formData.append('project_id', projectId);
+            formData.append('task_index', taskIndex);
+
+            if (!wasDone) {
+                formData.append('done', '1');
+            }
+
+            fetch('task-check.php', {
+                method: 'POST',
+                body: formData
+            }).catch(error => {
+                console.error('Error:', error);
+                // エラーが発生した場合は元に戻す
+                if (wasDone) {
+                    taskElement.classList.add('done-task');
+                    doneTasks++;
+                } else {
+                    taskElement.classList.remove('done-task');
+                    doneTasks--;
+                }
+                updateProgressBar();
+            });
+        }
+    </script>
 </body>
 
 </html>

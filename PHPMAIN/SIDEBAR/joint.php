@@ -1,12 +1,18 @@
 <?php
 // ========== joint.php (マルチタスク追加処理の例) ==========
 
+// セッション開始（ログイン情報を取得するため）
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $project_id = $_POST['project_id'] ?? '';
     $multi_title = trim($_POST['multi_title'] ?? '');
     $multi_deadline = $_POST['multi_deadline'] ?? '';
     $subtasks = $_POST['subtasks'] ?? [];
-    $creator = 'ユーザー名'; // 実際の実装では適切に設定
+
+    // セッションからログインユーザーのIDを取得
+    // セッション変数名は実際のログイン処理に合わせて調整してください
+    $creator = $_SESSION['user_id'] ?? '1'; // デフォルトとして1を設定（実際の実装に合わせて変更）
 
     if ($project_id !== '' && $multi_title !== '' && $multi_deadline !== '') {
         $task_csv = '../../CSV/jointtask.csv';
@@ -15,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // サブタスクを結合
         $subtasks_str = implode('|', array_filter($subtasks));
 
-        // 新しいタスクデータ
+        // 新しいタスクデータ（creatorにはユーザーIDを保存）
         $new_task = [$project_id, $multi_title, $multi_deadline, $subtasks_str, $creator];
 
         // ヘッダーチェック
@@ -42,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             markProjectAsCreated($project_csv, $project_id);
         }
 
-        header("Location: jointtask.php");
+        header("Location: add-task.php");
         exit;
     } else {
         echo "必要な情報が入力されていません。";
