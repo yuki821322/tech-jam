@@ -100,7 +100,7 @@ $progress_percent = $total_tasks > 0 ? round(($done_tasks / $total_tasks) * 100)
 
 <head>
     <meta charset="UTF-8">
-    <title>ようこそ</title>
+    <title>ようこそ</titl
     <link rel="stylesheet" href="../CSS/from/from.css">
     <style>
         /* プログレスバーのスタイル改善 */
@@ -142,6 +142,7 @@ $progress_percent = $total_tasks > 0 ? round(($done_tasks / $total_tasks) * 100)
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
     </style>
+    <link rel="stylesheet" href="../CSS/from/from.css?v=5.0">
     <link rel="stylesheet" href="../CSS/from/header.css">
 </head>
 
