@@ -30,5 +30,5 @@ if (!isset($_SESSION['csv_name'])) {
         </ul>
     </div>
     <div class="overlay" id="overlay"></div>
-    <h1>tech-jam</h1>
+    <h1>Team Note </h1>
 </header>
