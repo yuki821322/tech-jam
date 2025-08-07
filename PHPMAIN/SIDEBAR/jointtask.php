@@ -1,6 +1,26 @@
 <?php
 // ========== jointtask.php (マルチタスク一覧表示) ==========
 
+// ユーザーデータを読み込む
+$user_csv = '../../CSV/user_data.csv';
+$users = [];
+
+if (file_exists($user_csv) && ($fp = fopen($user_csv, 'r')) !== false) {
+    $header = fgetcsv($fp); // ヘッダー行をスキップ
+
+    // UTF-8 BOM が入ってる場合、強制的に削除
+    if (!empty($header)) {
+        $header[0] = preg_replace('/^\xEF\xBB\xBF/', '', $header[0]);
+    }
+
+    while (($row = fgetcsv($fp)) !== false) {
+        if (count($row) >= 2) {
+            $users[$row[0]] = $row[1]; // ID => 名前 の連想配列に
+        }
+    }
+    fclose($fp);
+}
+
 // プロジェクト一覧を取得
 $project_csv = '../../CSV/project.csv';
 $projects = [];
@@ -41,12 +61,16 @@ if (file_exists($task_csv) && ($fp = fopen($task_csv, 'r')) !== false) {
         $row[0] = preg_replace('/^\xEF\xBB\xBF/', '', $row[0]);
 
         $project_id = $row[0];
+        $creator_id = $row[4]; // 作成者のユーザーID
+        $creator_name = isset($users[$creator_id]) ? $users[$creator_id] : $creator_id; // IDから名前を取得、見つからない場合はIDをそのまま表示
+
         $task = [
             'id' => $task_counter++, // ユニークなタスクID
             'title' => $row[1],
             'deadline' => $row[2],
             'subtasks' => array_filter(explode('|', $row[3])), // 空の要素を除去
-            'creator' => $row[4],
+            'creator' => $creator_name, // 名前を設定
+            'creator_id' => $creator_id, // 必要に応じてIDも保持
             'project_id' => $project_id
         ];
 
