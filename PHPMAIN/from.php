@@ -100,49 +100,8 @@ $progress_percent = $total_tasks > 0 ? round(($done_tasks / $total_tasks) * 100)
 
 <head>
     <meta charset="UTF-8">
-    <title>ようこそ</titl
+    <title>ようこそ</title>
     <link rel="stylesheet" href="../CSS/from/from.css">
-    <style>
-        /* プログレスバーのスタイル改善 */
-        progress {
-            width: 100%;
-            height: 30px;
-            -webkit-appearance: none;
-            appearance: none;
-            border: 2px solid #ffffff;
-            border-radius: 15px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        progress::-webkit-progress-bar {
-            background-color: #ffffff;
-            border-radius: 12px;
-        }
-
-        progress::-webkit-progress-value {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ffa726, #66bb6a);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
-        }
-
-        progress::-moz-progress-bar {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ffa726, #66bb6a);
-            border-radius: 12px;
-        }
-
-        /* プログレスバーのテキストスタイル */
-        #progress-text {
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 10px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-    </style>
-    <link rel="stylesheet" href="../CSS/from/from.css?v=5.0">
     <link rel="stylesheet" href="../CSS/from/header.css">
 </head>
 
