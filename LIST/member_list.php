@@ -31,9 +31,11 @@ if (($fp = fopen($filename, 'r')) !== false) {
     <meta charset="UTF-8">
     <title>メンバーリスト</title>
     <link rel="stylesheet" href="../CSS//list/member_list.css">
+    <link rel="stylesheet" href="../CSS/from/header.css">
 </head>
 
 <body>
+    <?php include '../PHPMAIN/header.php'; ?>
     <div class="container">
         <h1>会員詳細</h1>
         <a href="./DELETE/erased.php">削除済み一覧</a>
@@ -69,6 +71,7 @@ if (($fp = fopen($filename, 'r')) !== false) {
             <p class="not-found">メンバーが存在しません。</p>
         <?php endif; ?>
     </div>
+    <script src="/tech-jam/JS/header.js"></script>
 </body>
 
 </html>

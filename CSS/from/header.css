@@ -1,76 +1,8 @@
-/* ハンバーガーメニュー */
-.hamburger {
-  position: absolute;
-  top: 33px;
-  left: 20px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 20px;
-  cursor: pointer;
-}
-
-.bar {
-  height: 3px;
-  background: black;
-  border-radius: 2px;
-  transition: 0.3s ease;
-}
-
-.hamburger.active .bar:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-
-.hamburger.active .bar:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active .bar:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-}
-
-/* サイドバー */
-.sidebar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 250px;
-  height: 875px;
-  background: rgb(44, 130, 205);
-  transform: translateX(-100%);
-  transition: 0.3s ease;
-  z-index: 999;
+/* 基本設定 */
+body {
+  margin: 0;
   padding-top: 80px;
-}
-
-.sidebar.show {
-  transform: translateX(0);
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 35px;
-}
-
-.sidebar img{
-  filter: brightness(0) invert(1);
-}
-
-.sidebar li {
-  padding: 15px 30px;
-}
-
-.sidebar a {
-  text-decoration: none;
-  color: rgb(255, 254, 254);
-}
-
-.sidebar img {
-  width: 15px;
-  margin-right: 10px;
+  font-family: Arial, sans-serif;
 }
 
 /* ヘッダー */
@@ -83,33 +15,25 @@ header {
   color: white;
   padding: 20px 60px;
   z-index: 1000;                
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* スクロール時の下に余白入れる用（例: bodyやmain） */
-body {
-  margin: 0;
-  padding-top: 80px;           
-}
-
-
+/* ヘッダーh1（ホバー効果付き） */
 header h1 {
   margin: 0 0 0 40px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-/* オーバーレイ */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  display: none;
-  z-index: 998;
+header h1:hover {
+  transform: translateY(-3px);
 }
+
 /* ハンバーガーメニュー */
 .hamburger {
+  position: absolute;
   top: 33px;
   left: 20px;
   z-index: 9999;
@@ -140,6 +64,57 @@ header h1 {
   transform: translateY(-8px) rotate(-45deg);
 }
 
+/* サイドバー */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: rgb(44, 130, 205);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 999;
+  padding-top: 80px;
+  overflow-y: auto;
+}
+
+.sidebar.show {
+  transform: translateX(0);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 35px;
+}
+
+.sidebar li {
+  padding: 15px 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: rgb(255, 254, 254);
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.sidebar a:hover {
+  color: #ffffff;
+}
+
+.sidebar img {
+  width: 15px;
+  margin-right: 10px;
+  filter: brightness(0) invert(1);
+}
 
 /* オーバーレイ */
 .overlay {
@@ -157,7 +132,23 @@ header h1 {
   display: block;
 }
 
-.overlay.show {
-  display: block;
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  header {
+    padding: 15px 40px;
+  }
+  
+  header h1 {
+    margin: 0 0 0 20px;
+    font-size: 24px;
+  }
+  
+  .hamburger {
+    top: 28px;
+    left: 15px;
+  }
+  
+  body {
+    padding-top: 70px;
+  }
 }
-

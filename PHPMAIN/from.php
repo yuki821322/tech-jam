@@ -85,15 +85,25 @@ if (file_exists($joint_csv) && ($fp = fopen($joint_csv, 'r')) !== false) {
     fclose($fp);
 }
 
-// プログレスバー計算
-$total_tasks = $done_tasks = 0;
-foreach ($tasks_by_project as $project_tasks) {
+// 各プロジェクトのプログレス計算
+$project_progress = [];
+foreach ($projects as $project_id => $project_title) {
+    $project_tasks = $tasks_by_project[$project_id] ?? [];
+    $total = count($project_tasks);
+    $done = 0;
+
     foreach ($project_tasks as $task) {
-        $total_tasks++;
-        if ($task['done'] === '1') $done_tasks++;
+        if ($task['done'] === '1') $done++;
     }
+
+    $progress_percent = $total > 0 ? round(($done / $total) * 100) : 0;
+
+    $project_progress[$project_id] = [
+        'total' => $total,
+        'done' => $done,
+        'percent' => $progress_percent
+    ];
 }
-$progress_percent = $total_tasks > 0 ? round(($done_tasks / $total_tasks) * 100) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -127,6 +137,20 @@ $progress_percent = $total_tasks > 0 ? round(($done_tasks / $total_tasks) * 100)
                 <?php foreach ($projects as $project_id => $project_title): ?>
                     <div class="jointtask-project">
                         <h2><?= htmlspecialchars($project_title, ENT_QUOTES, 'UTF-8') ?></h2>
+
+                        <!-- 各プロジェクトのプログレスバー -->
+                        <div class="project-progress">
+                            <progress id="progress-bar-<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>"
+                                max="100"
+                                value="<?= $project_progress[$project_id]['percent'] ?>">
+                                <?= $project_progress[$project_id]['percent'] ?>%
+                            </progress>
+                            <span id="progress-text-<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>">
+                                <?= $project_progress[$project_id]['percent'] ?>%
+                                (<?= $project_progress[$project_id]['done'] ?>/<?= $project_progress[$project_id]['total'] ?>)
+                            </span>
+                        </div>
+
                         <?php $project_tasks = $tasks_by_project[$project_id] ?? []; ?>
 
                         <?php if (empty($project_tasks)): ?>
@@ -147,27 +171,30 @@ $progress_percent = $total_tasks > 0 ? round(($done_tasks / $total_tasks) * 100)
                 <?php endforeach; ?>
             </div>
         </div>
-
-        <!-- プログレスバー -->
-        <div class="progress">
-            <h1>プログレスバー</h1>
-            <progress id="progress-bar" max="100" value="<?= $progress_percent ?>"><?= $progress_percent ?>%</progress>
-            <p id="progress-text"><?= $progress_percent ?>% (<?= $done_tasks ?>/<?= $total_tasks ?>)</p>
-        </div>
     </div>
 
     <script src="/tech-jam/JS/header.js"></script>
     <script>
-        let totalTasks = <?= $total_tasks ?>;
-        let doneTasks = <?= $done_tasks ?>;
+        // 各プロジェクトのタスク数を保持
+        let projectData = {
+            <?php foreach ($projects as $project_id => $project_title): ?> '<?= htmlspecialchars($project_id, ENT_QUOTES, 'UTF-8') ?>': {
+                    total: <?= $project_progress[$project_id]['total'] ?>,
+                    done: <?= $project_progress[$project_id]['done'] ?>
+                }
+                <?= end($projects) === $project_title ? '' : ',' ?>
+            <?php endforeach; ?>
+        };
 
-        function updateProgressBar() {
-            const progressPercent = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
-            const progressBar = document.getElementById('progress-bar');
-            const progressText = document.getElementById('progress-text');
+        function updateProjectProgressBar(projectId) {
+            const data = projectData[projectId];
+            const progressPercent = data.total > 0 ? Math.round((data.done / data.total) * 100) : 0;
+            const progressBar = document.getElementById('progress-bar-' + projectId);
+            const progressText = document.getElementById('progress-text-' + projectId);
 
-            progressBar.value = progressPercent;
-            progressText.textContent = progressPercent + '% (' + doneTasks + '/' + totalTasks + ')';
+            if (progressBar && progressText) {
+                progressBar.value = progressPercent;
+                progressText.textContent = progressPercent + '% (' + data.done + '/' + data.total + ')';
+            }
         }
 
         function toggleTask(projectId, taskIndex) {
@@ -177,14 +204,14 @@ $progress_percent = $total_tasks > 0 ? round(($done_tasks / $total_tasks) * 100)
             // 取り消し線のトグル
             if (wasDone) {
                 taskElement.classList.remove('done-task');
-                doneTasks--; // 完了数を減らす
+                projectData[projectId].done--; // 完了数を減らす
             } else {
                 taskElement.classList.add('done-task');
-                doneTasks++; // 完了数を増やす
+                projectData[projectId].done++; // 完了数を増やす
             }
 
-            // プログレスバーを即座に更新
-            updateProgressBar();
+            // そのプロジェクトのプログレスバーを即座に更新
+            updateProjectProgressBar(projectId);
 
             // サーバーに状態を送信（非同期）
             const formData = new FormData();
@@ -203,12 +230,12 @@ $progress_percent = $total_tasks > 0 ? round(($done_tasks / $total_tasks) * 100)
                 // エラーが発生した場合は元に戻す
                 if (wasDone) {
                     taskElement.classList.add('done-task');
-                    doneTasks++;
+                    projectData[projectId].done++;
                 } else {
                     taskElement.classList.remove('done-task');
-                    doneTasks--;
+                    projectData[projectId].done--;
                 }
-                updateProgressBar();
+                updateProjectProgressBar(projectId);
             });
         }
     </script>
