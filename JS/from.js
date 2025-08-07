@@ -36,3 +36,4 @@ function updateProgressBar() {
         percentText.textContent = percent + '%';
     }
 }
+
